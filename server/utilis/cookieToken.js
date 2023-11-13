@@ -11,8 +11,8 @@ const cookieToken = (user, res) => {
 
     user.password = undefined;
 
-    res.status(200).cookie("token", token, options).json({
-        sucess: true,
+    res.status(201).cookie("token", token, options).json({
+        success: true,
         token,
         user
     });
