@@ -21,8 +21,10 @@ app.use(cookieParser());
 
 const user = require("./routes/user");
 const project = require("./routes/project");
+const projectUpdate = require("./routes/projectUpdate")
 
 app.use("/api/v1", user);
 app.use("/api/v1", project);
+app.use("/api/v1", projectUpdate);
 
 module.exports = app
