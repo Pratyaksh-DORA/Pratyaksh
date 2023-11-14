@@ -24,7 +24,18 @@ const userSchema = new mongoose.Schema({
         enum: ['admin', 'projectManager', 'dataEntry'],
         default: 'admin',
         required: true
-    }
+    },
+    currentProject: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Project",
+        default: null,
+    },
+    projects: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: "Project"
+        }
+    ]
 
 });
 
