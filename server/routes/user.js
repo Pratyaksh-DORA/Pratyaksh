@@ -1,14 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const { signup, login, logout, createProjectManager } = require("../controllers/userController");
+const { signup, login, logout, createUser } = require("../controllers/userController");
 const { isLoggedIn, customRole } = require("../middlewares/user")
 
 
-router.route("/signup").post(signup)
+// all user routes
 router.route("/login").post(login)
 router.route("/logout").get(logout)
 
-router.route("/admin/createProjectManager").post(isLoggedIn, customRole("admin"), createProjectManager)
+// admin routes
+router.route("/signup").post(signup)
+router.route("/createUser").post(isLoggedIn, customRole("admin", "projectManager"), createUser)
+
 
 
 module.exports = router

@@ -4,6 +4,7 @@ const CustomError = require("../utilis/customError");
 exports.addProject = async (req, res, next) => {
 
     const { name, description, location, startDate, endDate, milestones, status } = req.body;
+    const user = req.user.id;
 
     if (!name) {
         return (next(new CustomError("Project name is required", 400)));
@@ -36,7 +37,8 @@ exports.addProject = async (req, res, next) => {
         location,
         startDate,
         endDate,
-        milestones
+        milestones,
+        user
     });
 
     res.status(200).json(project)

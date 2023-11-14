@@ -73,7 +73,13 @@ exports.logout = async (req, res, next) => {
 
 }
 
-exports.createProjectManager = async (req, res, next) => {
+exports.createUser = async (req, res, next) => {
+
+    const { role } = req.user
+    let userRole = "projectManager";
+    if (role == "projectManager") {
+        userRole = "dataEntry"
+    }
 
     const { username, email, password } = req.body
 
@@ -100,7 +106,7 @@ exports.createProjectManager = async (req, res, next) => {
         username,
         email,
         password,
-        role: "projectManager"
+        role: userRole
     });
 
     res.status(200).json(user);
