@@ -58,6 +58,7 @@ exports.addProject = async (req, res, next) => {
 exports.getOneProject = async (req, res, next) => {
     const project = await Project.findById(req.params.id);
 
+
     if (!project) {
         return (next(new CustomError("Project not found", 401)));
     }
@@ -72,4 +73,12 @@ exports.getOneProject = async (req, res, next) => {
         project,
         updatedUser
     })
+}
+
+exports.getAllProjectOfUser = async (req, res, next) => {
+    const user = req.user.id
+
+    const allProjects = await Project.find({ user });
+
+    res.status(200).json(allProjects)
 }
