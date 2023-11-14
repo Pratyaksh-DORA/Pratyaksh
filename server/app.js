@@ -20,7 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const user = require("./routes/user");
+const project = require("./routes/project");
 
 app.use("/api/v1", user);
+app.use("/api/v1", project);
 
 module.exports = app
