@@ -1,9 +1,10 @@
 const ProjectUpdate = require("../models/projectUpdate");
+const stringConstants = require("../utilis/strringConstants");
 
 exports.addProjectUpdate = async (req, res, next) => {
     const userId = req.user.id;
     let projectId = req.user.currentProject;
-    console.log(projectId)
+
     projectId = projectId.toString();
     const { progressPercentage, externalFactors } = req.body;
     const updateDate = new Date();
@@ -13,7 +14,7 @@ exports.addProjectUpdate = async (req, res, next) => {
     const todayExsist = await ProjectUpdate.findOne({ updateDate });
 
     if (todayExsist) {
-        return next(new CustomError("Today's update already exists, reupdate for further changes", 400));
+        return next(new CustomError(stringConstants.updateExsist, 400));
     }
 
     const update = await ProjectUpdate.create({
@@ -26,3 +27,10 @@ exports.addProjectUpdate = async (req, res, next) => {
 
     res.status(200).json(update);
 };
+
+exports.getAllUpdatesOfProject = async (req, res, next) => {
+    let projectId = req.user.currentProject
+    projectId = projectId.toString();
+    const updates = await ProjectUpdate.find({ projectId });
+    res.status(200).json(updates)
+}

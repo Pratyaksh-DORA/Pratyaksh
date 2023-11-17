@@ -1,6 +1,7 @@
 const Project = require("../models/Project");
 const User = require("../models/User")
 const CustomError = require("../utilis/customError");
+const stringConstants = require("../utilis/strringConstants")
 
 exports.addProject = async (req, res, next) => {
 
@@ -8,28 +9,28 @@ exports.addProject = async (req, res, next) => {
     const user = req.user.id;
 
     if (!name) {
-        return (next(new CustomError("Project name is required", 400)));
+        return (next(new CustomError(stringConstants.noName, 400)));
     }
     if (!description) {
-        return (next(new CustomError("Project Description is required", 400)));
+        return (next(new CustomError(stringConstants.noDescription, 400)));
     }
     if (!location) {
-        return (next(new CustomError("Project Location is required", 400)));
+        return (next(new CustomError(stringConstants.noLocation, 400)));
     }
     if (!startDate) {
-        return (next(new CustomError("Project Start Date is required")));
+        return (next(new CustomError(stringConstants.noDate, 400)));
     }
     if (!endDate) {
-        return (next(new CustomError("Project End Date is required")));
+        return (next(new CustomError(stringConstants.noDate, 400)));
     }
     if (!milestones) {
-        return (next(new CustomError("Project Milestones is required")));
+        return (next(new CustomError(stringConstants.noMilestones, 400)));
     }
 
     const fetchedProject = await Project.findOne({ name });
 
     if (fetchedProject) {
-        return (next(new CustomError("Project with this name already exsist, choose other")));
+        return (next(new CustomError(stringConstants.nameExsist, 400)));
     };
 
     const project = await Project.create({
@@ -60,7 +61,7 @@ exports.getOneProject = async (req, res, next) => {
 
 
     if (!project) {
-        return (next(new CustomError("Project not found", 401)));
+        return (next(new CustomError(stringConstants.noProject, 401)));
     }
     const userId = req.user.id
     const updatedUser = await User.findByIdAndUpdate(userId, { currentProject: project._id }, {
@@ -82,3 +83,14 @@ exports.getAllProjectOfUser = async (req, res, next) => {
 
     res.status(200).json(allProjects)
 }
+
+exports.getAllUsersOfProject = async (req, res, next) => {
+    let projectId = req.user.currentProject;
+    projectId = projectId.toString();
+
+    const users = await User.find({ projects: projectId });
+
+    res.status(200).json(users)
+
+}
+

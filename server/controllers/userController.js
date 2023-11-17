@@ -1,28 +1,31 @@
 const User = require("../models/User");
 const CustomError = require("../utilis/customError");
-const cookieToken = require("../utilis/cookieToken")
+const stringConstants = require("../utilis/strringConstants")
+const cookieToken = require("../utilis/cookieToken");
+
+
 
 
 exports.signup = async (req, res, next) => {
     const { username, email, password } = req.body
 
     if (!username) {
-        return (next(new CustomError("Username is required for SignUp", 400)));
+        return (next(new CustomError(stringConstants.noUsername, 400)));
     }
     if (!email) {
-        return (next(new CustomError("Email is required for SignUp", 400)));
+        return (next(new CustomError(stringConstants.noEmail, 400)));
     }
     if (!password) {
-        return (next(new CustomError("Password is required for SignUp", 400)));
+        return (next(new CustomError(stringConstants.noPassword, 400)));
     }
 
     const fetchedUsername = await User.findOne({ username });
     if (fetchedUsername) {
-        return (next(new CustomError("Username already exsist, try with new username", 400)))
+        return (next(new CustomError(stringConstants.usernameExsist, 400)))
     }
     const fetchedEmail = await User.findOne({ email })
     if (fetchedEmail) {
-        return (next(new CustomError("Email already exsist, try different email", 400)))
+        return (next(new CustomError(stringConstants.emailExsist, 400)))
     }
 
     const user = await User.create({
@@ -39,21 +42,21 @@ exports.login = async (req, res, next) => {
     const { username, password } = req.body;
 
     if (!username) {
-        return (next(new CustomError("Username is required for login", 400)));
+        return (next(new CustomError(stringConstants.noUsername, 400)));
     }
     if (!password) {
-        return (next(new CustomError("Password is required for login", 400)));
+        return (next(new CustomError(stringConstants.noPassword, 400)));
     }
 
     const user = await User.findOne({ username }).select("+password");
 
     if (!user) {
-        return (next(new CustomError("You have not registered to our product, signup before login", 400)));
+        return (next(new CustomError(stringConstants.noUser, 400)));
     }
     const isPasswordCorrect = await user.isValidatedPassword(password);
 
     if (!isPasswordCorrect) {
-        return (next(new CustomError("Incorrect password", 400)));
+        return (next(new CustomError(stringConstants.incorrectPassword, 400)));
     }
 
     cookieToken(user, res);
@@ -87,16 +90,16 @@ exports.createUser = async (req, res, next) => {
     projects.push(currentProject);
 
     if (!username) {
-        return (next(new CustomError("Username is required for SignUp", 400)));
+        return (next(new CustomError(stringConstants.noUsername, 400)));
     }
     if (!email) {
-        return (next(new CustomError("Email is required for SignUp", 400)));
+        return (next(new CustomError(stringConstants.noEmail, 400)));
     }
     if (!password) {
-        return (next(new CustomError("Password is required for SignUp", 400)));
+        return (next(new CustomError(stringConstants.noPassword, 400)));
     }
     if (!currentProject && userRole == "dataEntry") {
-        return (next(new CustomError("Select a project first to add dataEntry", 400)))
+        return (next(new CustomError(stringConstants.noProjectSelected, 400)))
     }
 
     const fetchedUsername = await User.findOne({ username });
@@ -115,10 +118,10 @@ exports.createUser = async (req, res, next) => {
 
     } else {
         if (fetchedEmail) {
-            return (next(new CustomError("Email already exsist, try different email", 400)))
+            return (next(new CustomError(stringConstants.emailExsist, 400)))
         }
         if (fetchedUsername) {
-            return (next(new CustomError("Username already exsist, try with new username", 400)))
+            return (next(new CustomError(stringConstants.usernameExsist, 400)))
         }
 
 
