@@ -75,6 +75,22 @@ exports.logout = async (req, res, next) => {
     })
 
 }
+exports.changePassword = async (req, res, next) => {
+    const userId = req.user.id;
+
+    const user = await User.findById(userId).select("+password");
+
+    const isCorrectOldPassword = await user.isValidatedPassword(req.body.oldPassword);
+
+    if (!isCorrectOldPassword) {
+        return (next(new CustomError(stringConstants.incorrectPassword, 400)))
+    }
+    user.password = req.body.newPassword;
+
+    await user.save();
+    cookieToken(user, res);
+
+}
 
 exports.createUser = async (req, res, next) => {
 

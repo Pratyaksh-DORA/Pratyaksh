@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { signup, login, logout, createUser } = require("../controllers/userController");
-const { isLoggedIn, customRole } = require("../middlewares/user")
+const { signup, login, logout, createUser, changePassword } = require("../controllers/userController");
+const { isLoggedIn, customRole, } = require("../middlewares/user")
 
 
 // all user routes
 router.route("/login").post(login)
 router.route("/logout").get(logout)
+router.route("/changePassword").post(isLoggedIn, changePassword)
 
 // admin routes
 router.route("/signup").post(signup)

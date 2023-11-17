@@ -34,3 +34,4 @@ exports.getAllUpdatesOfProject = async (req, res, next) => {
     const updates = await ProjectUpdate.find({ projectId });
     res.status(200).json(updates)
 }
+
