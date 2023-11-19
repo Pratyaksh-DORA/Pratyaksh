@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models/user");
 const CustomError = require("../utilis/customError");
 const stringConstants = require("../utilis/strringConstants")
 const cookieToken = require("../utilis/cookieToken");

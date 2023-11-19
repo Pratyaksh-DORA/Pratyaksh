@@ -1,5 +1,5 @@
-const Project = require("../models/Project");
-const User = require("../models/User")
+const Project = require("../models/project");
+const User = require("../models/user")
 const CustomError = require("../utilis/customError");
 const stringConstants = require("../utilis/strringConstants")
 
