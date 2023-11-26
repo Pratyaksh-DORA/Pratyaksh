@@ -7,37 +7,37 @@ const projectSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        // required: true
     },
     location: {
         type: {
             type: String,
             enum: ['Point'],
-            required: true
+            // required: true
         },
         coordinates: {
             type: [Number],
-            required: true
+            // required: true
         }
     },
     startDate: {
         type: Date,
-        required: true
+        // required: true
     },
     endDate: {
         type: Date,
-        required: true
+        // required: true
     },
     status: {
         type: String,
-        required: true,
+        // required: true,
         default: "NOt Started"
     },
     milestones: [
         {
             name: {
                 type: String,
-                required: true,
+                // required: true,
             },
             target_date: {
                 type: Date
