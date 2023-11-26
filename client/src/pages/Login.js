@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
 import { FormInput } from "../components"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GoWorkflow } from "react-icons/go";
+import { useDispatch } from 'react-redux';
+import { login } from "../features/AuthSlice"
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [values, setValues] = useState({
         username: "",
         password: ""
@@ -18,7 +25,6 @@ const Login = () => {
             errorMessage:
                 "Username should be 3-16 characters and shouldn't include any special character!",
             label: "Username",
-            // pattern: "^[A-Za-z0-9]{3,16}$",
             required: true,
         },
         {
@@ -29,7 +35,6 @@ const Login = () => {
             errorMessage:
                 "Password should be 6 characters and include at least 1 letter, 1 number and 1 special character!",
             label: "Password",
-            // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$`,
             required: true,
         },
 
@@ -38,9 +43,21 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        axios.post("http://localhost:5000/api/v1/login", values)
+            .then((res) => {
+                const { user, token } = res.data;
+
+                dispatch(login({ user, token }));
+                navigate("/main")
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error.message);
+            })
+
+
     };
 
-    const onChange = (e) => {
+    const handleChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
 
@@ -49,6 +66,7 @@ const Login = () => {
         <div className='h-screen'>
             <div className='flex justify-between px-24 pt-6'>
                 <Link to="/" className='font-bold flex justify-center items-center text-2xl gap-1'><GoWorkflow />Flow</Link>
+                <ToastContainer />
             </div>
             <div className='flex justify-center items-center mt-24 '>
                 <div>
@@ -60,10 +78,10 @@ const Login = () => {
                                 key={input.id}
                                 {...input}
                                 value={values[input.name]}
-                                onChange={onChange}
+                                onChange={handleChange}
                             />
                         ))}
-                        <button onClick={() => console.log(values)} className="w-full p-2 mt-4  border rounded-md" type="submit">Continue with Flow</button>
+                        <button className="w-full p-2 mt-4  border rounded-md" type="submit">Continue with Flow</button>
                         <Link to="/" className='text-xs underline underline-offset-2 text-gray-400 mt-2'>Forgot Password ?</Link>
                     </form>
 

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { FormInput } from "../components"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GoWorkflow } from "react-icons/go";
 
 
 const Signup = () => {
+    const navigate = useNavigate()
     const [values, setValues] = useState({
         username: "",
         email: "",
@@ -57,6 +58,8 @@ const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(values);
+        navigate("/main")
     };
 
     const onChange = (e) => {
@@ -73,7 +76,7 @@ const Signup = () => {
                 <div>
 
                     <form onSubmit={handleSubmit} className='flex justify-center items-center flex-col' >
-                        <p className='text-5xl font-bold mb-2'>Signup</p>
+                        <p className='text-5xl font-bold mb-2'>Sign up</p>
                         {inputs.map((input) => (
                             <FormInput
                                 key={input.id}
@@ -82,7 +85,7 @@ const Signup = () => {
                                 onChange={onChange}
                             />
                         ))}
-                        <button onClick={() => console.log(values)} className="w-full p-2 mt-4  border rounded-md" type="submit">Continue with Flow</button>
+                        <button onClick={(e) => handleSubmit(e)} className="w-full p-2 mt-4  border rounded-md" type="submit">Continue with Flow</button>
                         <Link to="/" className='text-xs underline underline-offset-2 text-gray-400 mt-2'>Forgot Password ?</Link>
                     </form>
 
