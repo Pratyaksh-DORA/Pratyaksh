@@ -34,17 +34,7 @@ const Sidebar = () => {
 
     }, [])
     useEffect(() => {
-        console.log("project details")
-        let id = user.currentProject
-        id = id.toString();
-        axios.get(`http://localhost:5000/api/v1/getOneProject/${id}`, { headers })
-            .then((res) => {
-                const project = res.data.project
-                console.log(project)
-                dispatch(editProject({ project }))
-            }).catch((error) => {
-                console.log(error)
-            })
+
     }, [selectedProject])
     const openModal = () => {
         const buttonRect = buttonRef.current.getBoundingClientRect();
@@ -62,18 +52,33 @@ const Sidebar = () => {
     };
     const handleProjectClick = (project) => {
         setSelectedProject(project);
-        let currentProject = project._id
+        let currentProject = project._id;
 
         axios.put("http://localhost:5000/api/v1/updateUser", { currentProject }, { headers })
             .then((res) => {
-                const user = res.data.user
-                dispatch(login({ user, token }))
+                const user = res.data.user;
+                dispatch(login({ user, token }));
 
+                // Fetch project details after user information is updated
+                console.log("project details");
+                let id = user.currentProject;
+                id = id.toString();
+                axios.get(`http://localhost:5000/api/v1/getOneProject/${id}`, { headers })
+                    .then((res) => {
+                        const project = res.data.project;
+                        console.log(project);
+                        dispatch(editProject({ project }));
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+                    .finally(() => {
+                        closeModal(); // Close the modal after updating project details
+                    });
             })
-            .catch((error) => console.error(error))
-
-        closeModal();
+            .catch((error) => console.error(error));
     };
+
     selectedProject && console.log(selectedProject.name)
     return (
         <div className={` text-gray-600 h-screen ${isCollapsed ? 'w-16 bg-white' : 'w-52 bg-secondary'} transition-all`}>

@@ -37,7 +37,7 @@ const Modal = ({ projects, closeModal, position, parentRef, onProjectClick }) =>
             <h2 className="text-2xl font-bold mb-4">Projects</h2>
             <div className="flex flex-col">
                 {projects.map((project) => (
-                    <Link key={project.id} to={`/main/${project._id}`} onClick={() => onProjectClick(project)}>
+                    <Link key={project._id} to={`/main/${project._id}`} onClick={() => onProjectClick(project)}>
                         {project.name}
                     </Link>
                 ))}
