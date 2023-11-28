@@ -46,9 +46,15 @@ const Login = () => {
         axios.post("http://localhost:5000/api/v1/login", values)
             .then((res) => {
                 const { user, token } = res.data;
-
+                console.log("hi")
+                console.log(user.currentProject)
                 dispatch(login({ user, token }));
-                navigate("/main")
+                if (user.currentProject.length !== 0) {
+                    navigate(`/main/${user.currentProject}`)
+                } else {
+                    navigate("/onboarding")
+                }
+
             })
             .catch((error) => {
                 console.error("An error occurred:", error.message);

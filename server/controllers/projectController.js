@@ -5,27 +5,14 @@ const stringConstants = require("../utilis/strringConstants")
 
 exports.addProject = async (req, res, next) => {
 
-    const { name, description, location, startDate, endDate, milestones, status } = req.body;
+    const { name } = req.body;
+
     const user = req.user.id;
 
     if (!name) {
         return (next(new CustomError(stringConstants.noName, 400)));
     }
-    if (!description) {
-        return (next(new CustomError(stringConstants.noDescription, 400)));
-    }
-    if (!location) {
-        return (next(new CustomError(stringConstants.noLocation, 400)));
-    }
-    if (!startDate) {
-        return (next(new CustomError(stringConstants.noDate, 400)));
-    }
-    if (!endDate) {
-        return (next(new CustomError(stringConstants.noDate, 400)));
-    }
-    if (!milestones) {
-        return (next(new CustomError(stringConstants.noMilestones, 400)));
-    }
+
 
     const fetchedProject = await Project.findOne({ name });
 
@@ -35,11 +22,11 @@ exports.addProject = async (req, res, next) => {
 
     const project = await Project.create({
         name,
-        description,
-        location,
-        startDate,
-        endDate,
-        milestones,
+        // description,
+        // location,
+        // startDate,
+        // endDate,
+        // milestones,
         user
     });
 
@@ -80,6 +67,7 @@ exports.getAllProjectOfUser = async (req, res, next) => {
     const user = req.user.id
 
     const allProjects = await Project.find({ user });
+
 
     res.status(200).json(allProjects)
 }

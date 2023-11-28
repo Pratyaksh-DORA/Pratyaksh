@@ -4,7 +4,7 @@ const { addProject, getOneProject, getAllProjectOfUser, getAllUsersOfProject } =
 const { isLoggedIn, customRole } = require("../middlewares/user")
 
 router.route("/addProject").post(isLoggedIn, customRole("projectManager"), addProject);
-router.route("/getOneProject/:id").post(isLoggedIn, getOneProject);
+router.route("/getOneProject/:id").get(isLoggedIn, getOneProject);
 router.route("/getAllProjectOfUser").get(isLoggedIn, getAllProjectOfUser);
 router.route("/getAllUsersOfProject").get(isLoggedIn, getAllUsersOfProject);
 

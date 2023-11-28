@@ -1,46 +1,80 @@
 import React, { useState } from 'react'
 import { FormInput } from "../components"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProject } from '../features/ProjectSlice';
+import { login } from '../features/AuthSlice';
+import axios from "axios"
 
 const AddProject = () => {
-    const navigate = useNavigate()
-    const [name, setName] = useState("")
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const token = localStorage.getItem("token");
+
+    const [values, setValues] = useState({
+        name: "",
+    });
+
+
     const inputs = [
         {
             id: 1,
-            name: "Team Name",
+            name: "name",
             type: "text",
             placeholder: "Team name",
             errorMessage:
-                "Teamname should be 3-16 characters and shouldn't include any special character!",
-            label: "Teamname",
+                "Team name should be 3-16 characters and shouldn't include any special characters!",
+            label: "Team name",
             required: true,
-        },]
+        },
+    ];
+
+    const headers = {
+        Authorization: `Bearer ${token}`,
+    };
+
     const handleChange = (e) => {
-        setName(e.target.value)
-    }
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate("/main")
 
-    }
+        axios
+            .post("http://localhost:5000/api/v1/addProject", { name: values.name }, { headers })
+            .then((res) => {
+                const id = res.data.project._id;
+                console.log(res.data.project._id)
+                dispatch(addProject(values.name, id));
+                navigate(`/main/${id}`);
+            })
+            .catch((error) => {
+                console.error("Error adding project:", error);
+                // You might want to show an error message to the user
+            });
+    };
+
     return (
         <div className='flex justify-center items-center h-screen bg-secondary'>
             <div className='flex flex-col items-center justify-center gap-4'>
                 <p className='text-3xl font-semibold '>Create a team project</p>
 
                 <form onSubmit={handleSubmit}>
-                    {inputs.map((inputs) => (
+                    {inputs.map((input) => (
                         <FormInput
+                            key={input.id}
                             onChange={handleChange}
-                            {...inputs}
-                            value={name} />
+                            {...input}
+                            value={values[input.name]}
+                        />
                     ))}
-                    <button onClick={() => console.log(name)} className="w-full p-2 mt-4  border rounded-md" type="submit">Continue</button>
+                    <button className="w-full p-2 mt-4  border rounded-md" type="submit">
+                        Continue
+                    </button>
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default AddProject
+export default AddProject;

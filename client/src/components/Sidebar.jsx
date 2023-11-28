@@ -1,25 +1,51 @@
-// Sidebar.js
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { useSelector, useDispatch } from 'react-redux';
+
+import { login } from "../features/AuthSlice"
+import { editProject } from "../features/ProjectSlice"
+import axios from "axios"
 
 import Modal from './Modal';
 
+
 const Sidebar = () => {
+    const dispatch = useDispatch()
+    const token = localStorage.getItem("token");
+    const { user } = useSelector((state) => state.auth);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
+    const [projects, setProjects] = useState([]);
     const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
     const buttonRef = useRef();
+    const headers = {
+        Authorization: `Bearer ${token}`,
+    };
 
-    const projects = [
-        { id: 1, name: "Project 1" },
-        { id: 2, name: "Project 2" },
-        // Add more projects as needed
-    ];
+    useEffect(() => {
+        axios.get("http://localhost:5000/api/v1/getAllProjectOfUser", { headers })
+            .then((res) => {
 
+                setProjects(res.data)
+            }).catch((error) => console.log(error))
 
+    }, [])
+    useEffect(() => {
+        console.log("project details")
+        let id = user.currentProject
+        id = id.toString();
+        axios.get(`http://localhost:5000/api/v1/getOneProject/${id}`, { headers })
+            .then((res) => {
+                const project = res.data.project
+                console.log(project)
+                dispatch(editProject({ project }))
+            }).catch((error) => {
+                console.log(error)
+            })
+    }, [selectedProject])
     const openModal = () => {
         const buttonRect = buttonRef.current.getBoundingClientRect();
         setModalPosition({
@@ -36,6 +62,16 @@ const Sidebar = () => {
     };
     const handleProjectClick = (project) => {
         setSelectedProject(project);
+        let currentProject = project._id
+
+        axios.put("http://localhost:5000/api/v1/updateUser", { currentProject }, { headers })
+            .then((res) => {
+                const user = res.data.user
+                dispatch(login({ user, token }))
+
+            })
+            .catch((error) => console.error(error))
+
         closeModal();
     };
     selectedProject && console.log(selectedProject.name)

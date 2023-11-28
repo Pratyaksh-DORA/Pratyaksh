@@ -13,19 +13,22 @@ export const authSlice = createSlice({
     reducers: {
         signup: (state, action) => {
             state.isAuthenticated = true;
-            state.user = action.payload;
-            state.token = action.token
+            state.user = action.payload.user;
+            state.token = action.payload.token
+            localStorage.setItem("token", action.payload.token);
         },
         login: (state, action) => {
             state.isAuthenticated = true;
             state.user = action.payload.user;
             state.token = action.payload.token;
-            console.log(state)
+            localStorage.setItem("token", action.payload.token);
+
         },
         logout: (state, action) => {
             state.isAuthenticated = false;
             state.user = null;
-            state.token = null
+            state.token = null;
+            localStorage.removeItem("token");
         },
     }
 })

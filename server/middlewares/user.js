@@ -5,8 +5,9 @@ const CustomError = require("../utilis/customError");
 exports.isLoggedIn = async (req, res, next) => {
     let token = req.cookies.token;
 
-    if (!token && req.header("Autorization")) {
-        token = req.header("Authorization").replace("Bearer", "");
+    if (!token && req.header("Authorization")) {
+        token = req.header("Authorization").replace("Bearer ", "").trim();
+
     }
 
     if (!token) {

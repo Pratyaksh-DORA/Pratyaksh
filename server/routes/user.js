@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { signup, login, logout, createUser, changePassword } = require("../controllers/userController");
+const { signup, login, logout, createUser, changePassword, updateUser } = require("../controllers/userController");
 const { isLoggedIn, customRole, } = require("../middlewares/user")
 
 
@@ -8,6 +8,7 @@ const { isLoggedIn, customRole, } = require("../middlewares/user")
 router.route("/login").post(login)
 router.route("/logout").get(logout)
 router.route("/changePassword").post(isLoggedIn, changePassword)
+router.route("/updateUser").put(isLoggedIn, updateUser)
 
 // admin routes
 router.route("/signup").post(signup)
