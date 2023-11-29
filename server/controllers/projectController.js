@@ -22,11 +22,6 @@ exports.addProject = async (req, res, next) => {
 
     const project = await Project.create({
         name,
-        // description,
-        // location,
-        // startDate,
-        // endDate,
-        // milestones,
         user
     });
 
@@ -82,3 +77,29 @@ exports.getAllUsersOfProject = async (req, res, next) => {
 
 }
 
+exports.getUpdateProject = async (req, res, next) => {
+    const projectId = req.params.id;
+
+    const project = await Project.findById(projectId);
+
+    if (!project) {
+        return next(new CustomError(stringConstants.noProject, 404));
+    }
+    const { name, description, location, startDate, endDate, status, milestones } = req.body;
+
+
+    if (name) project.name = name;
+    if (description) project.description = description;
+    if (location) project.location = location;
+    if (startDate) project.startDate = startDate;
+    if (endDate) project.endDate = endDate;
+    if (status) project.status = status;
+    if (milestones) project.milestones = milestones;
+
+
+    await project.save();
+
+
+    res.status(200).json({ success: true, project });
+
+}

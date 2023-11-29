@@ -7,37 +7,34 @@ const projectSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        // required: true
     },
     location: {
         type: {
             type: String,
             enum: ['Point'],
-            // required: true
         },
         coordinates: {
             type: [Number],
-            // required: true
         }
     },
     startDate: {
         type: Date,
-        // required: true
+
     },
     endDate: {
         type: Date,
-        // required: true
+
     },
     status: {
         type: String,
-        // required: true,
+
         default: "NOt Started"
     },
     milestones: [
         {
             name: {
                 type: String,
-                // required: true,
+
             },
             target_date: {
                 type: Date
@@ -45,7 +42,29 @@ const projectSchema = new mongoose.Schema({
             status: {
                 type: String,
                 default: "Not Started"
-            }
+            },
+            "tasks": [
+                {
+
+                    name: String,
+                    description: String,
+                    dueDate: Date,
+                    assigned: {
+                        type: mongoose.Schema.ObjectId,
+                        ref: "User",
+                        required: true
+
+                    },
+                    priority: {
+                        type: String,
+                        enum: ['low', 'high', 'medium', 'urgent'],
+                        default: 'low'
+                    },
+                    status: {
+                        type: String,
+                        default: "Not Started"
+                    },
+                },]
         }
     ],
     user: {

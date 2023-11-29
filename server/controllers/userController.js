@@ -179,7 +179,6 @@ exports.updateUser = async (req, res, next) => {
     }
     if (currentProject) {
         user.currentProject = currentProject;
-        console.log(currentProject)
     }
     if (projects) {
         user.projects = projects;
