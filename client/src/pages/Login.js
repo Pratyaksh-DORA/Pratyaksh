@@ -5,7 +5,7 @@ import { GoWorkflow } from "react-icons/go";
 import { useDispatch } from 'react-redux';
 import { login } from "../features/AuthSlice"
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -50,7 +50,7 @@ const Login = () => {
                 console.log(user.currentProject)
                 dispatch(login({ user, token }));
                 if (user.currentProject.length !== 0) {
-                    navigate(`/main/${user.currentProject}`)
+                    navigate(`/${user.currentProject}`)
                 } else {
                     navigate("/onboarding")
                 }

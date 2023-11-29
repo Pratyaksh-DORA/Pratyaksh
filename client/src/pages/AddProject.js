@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { FormInput } from "../components"
-import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, } from 'react-router-dom';
+import { useDispatch, } from 'react-redux';
 import { addProject } from '../features/ProjectSlice';
-import { login } from '../features/AuthSlice';
+
 import axios from "axios"
 
 const AddProject = () => {
@@ -46,7 +46,7 @@ const AddProject = () => {
                 const id = res.data.project._id;
                 console.log(res.data.project._id)
                 dispatch(addProject(values.name, id));
-                navigate(`/main/${id}`);
+                navigate(`/${id}`);
             })
             .catch((error) => {
                 console.error("Error adding project:", error);

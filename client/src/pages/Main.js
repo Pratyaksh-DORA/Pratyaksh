@@ -1,12 +1,18 @@
-import React from 'react'
-import { Sidebar } from '../components'
+// Main.js
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { Sidebar } from '../components';
 
-const main = () => {
+const Main = () => {
     return (
-        <div className='bg-white'>
+        <div className='bg-white flex'>
             <Sidebar />
+            <div className="flex-grow p-4 rounded-lg">
+
+                <Outlet />
+            </div>
         </div>
-    )
+    );
 }
 
-export default main
+export default Main;

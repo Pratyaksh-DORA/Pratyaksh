@@ -27,31 +27,28 @@ const Modal = ({ projects, closeModal, position, parentRef, onProjectClick }) =>
         };
     }, [parentRef, closeModal]);
 
-    const handleProjectClick = () => {
-        // Add any specific behavior when a project is clicked
-        closeModal();
-    };
+
 
     return (
         <div style={modalStyle} className="bg-white p-4 rounded-lg">
-            <h2 className="text-2xl font-bold mb-4">Projects</h2>
             <div className="flex flex-col">
                 {projects.map((project) => (
-                    <Link key={project._id} to={`/main/${project._id}`} onClick={() => onProjectClick(project)}>
+                    <Link key={project._id} to={`/${project._id}`} onClick={() => onProjectClick(project)}>
                         {project.name}
                     </Link>
                 ))}
             </div>
-            <div className="flex flex-col">
+
+            <div className="flex flex-col items-start ">
                 <button
                     // onClick={}
-                    className="mt-4  px-4 py-2 rounded hover:bg-blue-700"
+                    className="mt-4 text-sm"
                 >
                     Add another project
                 </button>
                 <button
                     // onClick={closeModal}
-                    className="mt-4  px-4 py-2 rounded hover:bg-blue-700"
+                    className="mt-1 text-sm"
                 >
                     Log out
                 </button>
