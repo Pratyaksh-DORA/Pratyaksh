@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editProjectTask } from "../features/ProjectSlice";
-import FormInput from "./FormInput";
 
 const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
     const dispatch = useDispatch();
@@ -26,58 +25,64 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
 
     return (
         <div>
-            <table className="min-w-full bg-white border border-gray-300">
+            <table className="table-fixed border-collapse border ">
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Due Date</th>
-                        <th>Assigned</th>
-                        <th>Priority</th>
-                        <th>Status</th>
+                    <tr className="bg-gray-200">
+                        <th className="w-1/6 border p-2">Name</th>
+                        <th className="w-1/6 border p-2">Description</th>
+                        <th className="w-1/6 border p-2">Due Date</th>
+                        <th className="w-1/12 border p-2">Assigned</th>
+                        <th className="w-1/12 border p-2">Priority</th>
+                        <th className="w-1/12 border p-2">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {tasks.length > 0 &&
                         tasks.map((task, index) => (
                             <tr key={index}>
-                                <td>
-                                    <FormInput
+                                <td className="border p-2">
+                                    <input
+                                        className="w-full focus:outline-none"
                                         type="text"
                                         value={editedTasks[index]?.name || task.name}
                                         onChange={(e) => handleEdit(index, "name", e.target.value)}
                                     />
                                 </td>
-                                <td>
-                                    <FormInput
+                                <td className="border p-2">
+                                    <input
+                                        className="w-full focus:outline-none"
                                         type="text"
                                         value={editedTasks[index]?.description || task.description}
                                         onChange={(e) => handleEdit(index, "description", e.target.value)}
                                     />
                                 </td>
-                                <td>
-                                    <FormInput
+                                <td className="border p-2">
+                                    <input
+                                        className="w-full focus:outline-none"
                                         type="text"
                                         value={editedTasks[index]?.dueDate || task.dueDate}
                                         onChange={(e) => handleEdit(index, "dueDate", e.target.value)}
                                     />
                                 </td>
-                                <td>
-                                    <FormInput
+                                <td className="border p-2">
+                                    <input
+                                        className="w-full focus:outline-none"
                                         type="text"
                                         value={editedTasks[index]?.assigned || task.assigned}
                                         onChange={(e) => handleEdit(index, "assigned", e.target.value)}
                                     />
                                 </td>
-                                <td>
-                                    <FormInput
+                                <td className="border p-2">
+                                    <input
+                                        className="w-full focus:outline-none"
                                         type="text"
                                         value={editedTasks[index]?.priority || task.priority}
                                         onChange={(e) => handleEdit(index, "priority", e.target.value)}
                                     />
                                 </td>
-                                <td>
-                                    <FormInput
+                                <td className="border p-2">
+                                    <input
+                                        className="w-full focus:outline-none"
                                         type="text"
                                         value={editedTasks[index]?.status || task.status}
                                         onChange={(e) => handleEdit(index, "status", e.target.value)}

@@ -6,7 +6,7 @@ const Main = () => {
     return (
         <div className='bg-white flex'>
             <Sidebar />
-            <div className="flex-grow p-4 rounded-lg">
+            <div className="w-full p-4 rounded-lg">
                 <Outlet />
             </div>
         </div>

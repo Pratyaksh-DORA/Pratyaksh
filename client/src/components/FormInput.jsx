@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const FormInput = (props) => {
-    const { label, errorMessage, onChange, id, value, pattern, ...inputProps } = props;
+    const { label, errorMessage, onChange, id, value, pattern, className, ...inputProps } = props;
 
     const [touched, setTouched] = useState(false);
 
@@ -12,7 +12,7 @@ const FormInput = (props) => {
     };
 
     return (
-        <div className="flex flex-col w-96">
+        <div className={`flex flex-col ${className || 'w-96'}`}>
             <label className="mt-2 text-sm text-gray-400">{label}</label>
             <input
                 className={`p-2 rounded-md border bg-secondary ${isValid || !touched ? "border-gray-300" : "border-red-400"

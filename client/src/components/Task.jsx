@@ -28,9 +28,10 @@ const Task = () => {
         <div>
             <div>
                 {editedMilestones.map((milestone, index) => (
-                    <div key={index}>
+                    <div key={index} className='mt-8'>
                         <h2>
                             <input
+                                className="mb-2 w-full focus:outline-none text-lg font-semibold"
                                 type="text"
                                 value={milestone.name}
                                 onChange={(e) => handleMilestoneEdit(index, 'name', e.target.value)}
