@@ -2,6 +2,7 @@ const Project = require("../models/project");
 const User = require("../models/user")
 const CustomError = require("../utilis/customError");
 const stringConstants = require("../utilis/strringConstants")
+const mongoose = require("mongoose")
 
 exports.addProject = async (req, res, next) => {
 
@@ -69,7 +70,7 @@ exports.getAllProjectOfUser = async (req, res, next) => {
 
 exports.getAllUsersOfProject = async (req, res, next) => {
     let projectId = req.user.currentProject;
-    projectId = projectId.toString();
+    // projectId = projectId.toString();
 
     const users = await User.find({ projects: projectId });
 
@@ -77,7 +78,7 @@ exports.getAllUsersOfProject = async (req, res, next) => {
 
 }
 
-exports.getUpdateProject = async (req, res, next) => {
+exports.updateProject = async (req, res, next) => {
     const projectId = req.params.id;
 
     const project = await Project.findById(projectId);

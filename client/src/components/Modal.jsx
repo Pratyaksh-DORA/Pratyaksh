@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchData } from "../utilis/Api"
+import { useDispatch } from 'react-redux';
+import { logout } from "../features/AuthSlice"
 
 const Modal = ({ projects, closeModal, position, parentRef, onProjectClick }) => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const modalStyle = {
         position: "absolute",
         top: `${position.y}px`,
@@ -26,6 +31,13 @@ const Modal = ({ projects, closeModal, position, parentRef, onProjectClick }) =>
         };
     }, [parentRef, closeModal]);
 
+    const handleLogout = async () => {
+        const res = await fetchData("/logout")
+        console.log(res);
+        navigate("/login")
+        dispatch(logout())
+
+    }
 
 
     return (
@@ -40,13 +52,13 @@ const Modal = ({ projects, closeModal, position, parentRef, onProjectClick }) =>
 
             <div className="flex flex-col items-start ">
                 <button
-                    // onClick={}
+                    onClick={() => navigate("/onboarding")}
                     className="mt-4 text-sm"
                 >
                     Add another project
                 </button>
                 <button
-                    // onClick={closeModal}
+                    onClick={handleLogout}
                     className="mt-1 text-sm"
                 >
                     Log out

@@ -6,10 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { login } from "../features/AuthSlice"
 import { editProject } from "../features/ProjectSlice"
-import axios from "axios"
-
 import Modal from './Modal';
-import { fetchData, postData, putData } from '../utilis/Api';
+import { fetchData, putData } from '../utilis/Api';
 import { Link } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa6";
 import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox } from "react-icons/md";
@@ -44,9 +42,6 @@ const Sidebar = () => {
 
     }, [])
 
-    const headers = {
-        Authorization: `Bearer ${token}`,
-    };
     const openModal = () => {
         const buttonRect = buttonRef.current.getBoundingClientRect();
         setModalPosition({
