@@ -4,12 +4,17 @@ import { useDispatch } from "react-redux";
 import { editProjectTask } from "../features/ProjectSlice";
 import FormInput from "./FormInput";
 
-const TaskTable = ({ tasks, milestoneIndex }) => {
+const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const [editedTasks, setEditedTasks] = useState([...tasks]);
 
-    const handleTaskEdit = (taskIndex, fieldName, value) => {
+    const handleTaskSave = () => {
+        dispatch(editProjectTask({ milestoneIndex, tasks: editedTasks }));
+        setIsEditing(false);
+    };
+
+    const handleEdit = (taskIndex, fieldName, value) => {
         const updatedTasks = [...editedTasks];
         updatedTasks[taskIndex] = {
             ...updatedTasks[taskIndex],
@@ -17,11 +22,6 @@ const TaskTable = ({ tasks, milestoneIndex }) => {
         };
         setEditedTasks(updatedTasks);
         setIsEditing(true);
-    };
-
-    const handleSave = () => {
-        dispatch(editProjectTask({ milestoneIndex, tasks: editedTasks }));
-        setIsEditing(false);
     };
 
     return (
@@ -45,54 +45,42 @@ const TaskTable = ({ tasks, milestoneIndex }) => {
                                     <FormInput
                                         type="text"
                                         value={editedTasks[index]?.name || task.name}
-                                        onChange={(e) =>
-                                            handleTaskEdit(index, "name", e.target.value)
-                                        }
+                                        onChange={(e) => handleEdit(index, "name", e.target.value)}
                                     />
                                 </td>
                                 <td>
                                     <FormInput
                                         type="text"
                                         value={editedTasks[index]?.description || task.description}
-                                        onChange={(e) =>
-                                            handleTaskEdit(index, "description", e.target.value)
-                                        }
+                                        onChange={(e) => handleEdit(index, "description", e.target.value)}
                                     />
                                 </td>
                                 <td>
                                     <FormInput
                                         type="text"
                                         value={editedTasks[index]?.dueDate || task.dueDate}
-                                        onChange={(e) =>
-                                            handleTaskEdit(index, "dueDate", e.target.value)
-                                        }
+                                        onChange={(e) => handleEdit(index, "dueDate", e.target.value)}
                                     />
                                 </td>
                                 <td>
                                     <FormInput
                                         type="text"
                                         value={editedTasks[index]?.assigned || task.assigned}
-                                        onChange={(e) =>
-                                            handleTaskEdit(index, "assigned", e.target.value)
-                                        }
+                                        onChange={(e) => handleEdit(index, "assigned", e.target.value)}
                                     />
                                 </td>
                                 <td>
                                     <FormInput
                                         type="text"
                                         value={editedTasks[index]?.priority || task.priority}
-                                        onChange={(e) =>
-                                            handleTaskEdit(index, "priority", e.target.value)
-                                        }
+                                        onChange={(e) => handleEdit(index, "priority", e.target.value)}
                                     />
                                 </td>
                                 <td>
                                     <FormInput
                                         type="text"
                                         value={editedTasks[index]?.status || task.status}
-                                        onChange={(e) =>
-                                            handleTaskEdit(index, "status", e.target.value)
-                                        }
+                                        onChange={(e) => handleEdit(index, "status", e.target.value)}
                                     />
                                 </td>
                             </tr>
@@ -100,7 +88,7 @@ const TaskTable = ({ tasks, milestoneIndex }) => {
                 </tbody>
             </table>
             {isEditing && (
-                <button onClick={handleSave} className="mt-4 p-2 border rounded-md">
+                <button onClick={handleTaskSave} className="mt-4 p-2 border rounded-md">
                     Save
                 </button>
             )}

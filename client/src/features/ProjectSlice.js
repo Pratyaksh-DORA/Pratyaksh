@@ -1,13 +1,13 @@
 // ProjectSlice.js
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     project: {
-        id: "",
-        name: "",
-        description: "",
+        id: '',
+        name: '',
+        description: '',
         location: {
-            type: "",
+            type: '',
             coordinates: [],
         },
         startDate: null,
@@ -17,19 +17,22 @@ const initialState = {
 };
 
 export const projectSlice = createSlice({
-    name: "project",
+    name: 'project',
     initialState,
     reducers: {
         addProject: (state, action) => {
             state.project.name = action.payload.name;
-            console.log(state);
         },
         editProject: (state, action) => {
-            state.project = action.payload.project;
+            state.project = action.payload;
         },
         editProjectTask: (state, action) => {
             const { milestoneIndex, tasks } = action.payload;
-            state.project.milestones[milestoneIndex].tasks = tasks;
+
+            // Ensure that milestones array exists before trying to access its index
+            if (state.project.milestones && state.project.milestones[milestoneIndex]) {
+                state.project.milestones[milestoneIndex].tasks = tasks;
+            }
         },
     },
 });
