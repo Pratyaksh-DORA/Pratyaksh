@@ -3,13 +3,12 @@ import { FormInput } from "../components"
 import { useNavigate, } from 'react-router-dom';
 import { useDispatch, } from 'react-redux';
 import { addProject } from '../features/ProjectSlice';
+import { fetchData, postData, putData } from '../utilis/Api';
 
-import axios from "axios"
 
 const AddProject = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const token = localStorage.getItem("token");
 
     const [values, setValues] = useState({
         name: "",
@@ -29,30 +28,26 @@ const AddProject = () => {
         },
     ];
 
-    const headers = {
-        Authorization: `Bearer ${token}`,
-    };
-
     const handleChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const res = await postData('/addProject', { name: values.name })
+            const id = res.project._id;
+            // const res1 = await putData('/updateUser', { currentProject: id })
 
-        axios
-            .post("http://localhost:5000/api/v1/addProject", { name: values.name }, { headers })
-            .then((res) => {
-                const id = res.data.project._id;
-                console.log(res.data.project._id)
-                dispatch(addProject(values.name, id));
-                navigate(`/${id}`);
-            })
-            .catch((error) => {
-                console.error("Error adding project:", error);
-                // You might want to show an error message to the user
-            });
-    };
+            dispatch(addProject(values.name, id));
+            navigate(`/${id}`);
+        }
+        catch (error) {
+            console.error('Error posting data:', error);
+        }
+    }
+
+
 
     return (
         <div className='flex justify-center items-center h-screen bg-secondary'>

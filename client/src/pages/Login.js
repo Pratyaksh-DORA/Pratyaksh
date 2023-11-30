@@ -4,9 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GoWorkflow } from "react-icons/go";
 import { useDispatch } from 'react-redux';
 import { login } from "../features/AuthSlice"
-import axios from "axios";
 import { ToastContainer, } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { postData } from "../utilis/Api"
 
 
 const Login = () => {
@@ -41,26 +41,16 @@ const Login = () => {
     ];
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:5000/api/v1/login", values)
-            .then((res) => {
-                const { user, token } = res.data;
-                console.log("hi")
-                console.log(user.currentProject)
-                dispatch(login({ user, token }));
-                if (user.currentProject.length !== 0) {
-                    navigate(`/${user.currentProject}`)
-                } else {
-                    navigate("/onboarding")
-                }
-
-            })
-            .catch((error) => {
-                console.error("An error occurred:", error.message);
-            })
-
-
+        const res = await postData("/login", values);
+        const { user, token } = res;
+        dispatch(login({ user, token }));
+        if (user.currentProject.length !== 0) {
+            navigate(`/${user.currentProject}`)
+        } else {
+            navigate("/onboarding")
+        }
     };
 
     const handleChange = (e) => {

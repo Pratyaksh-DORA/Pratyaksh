@@ -9,6 +9,7 @@ import { editProject } from "../features/ProjectSlice"
 import axios from "axios"
 
 import Modal from './Modal';
+import { fetchData, postData, putData } from '../utilis/Api';
 import { Link } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa6";
 import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox } from "react-icons/md";
@@ -31,13 +32,15 @@ const Sidebar = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/v1/getAllProjectOfUser", { headers })
-            .then((res) => {
-                setProjects(res.data);
-                let id = user.currentProject;
-                id = id.toString()
-                fetchProjectDetails(id);
-            }).catch((error) => console.log(error))
+        const fetchDetails = async () => {
+            const res = await fetchData("/getAllProjectofuser");
+            console.log(res)
+            setProjects(res);
+            let id = user.currentProject;
+            id = id.toString()
+            fetchProjectDetails(id);
+        }
+        fetchDetails()
 
     }, [])
 
@@ -58,38 +61,23 @@ const Sidebar = () => {
     const toggleSidebar = () => {
         setIsCollapsed(!isCollapsed);
     };
-    const handleProjectClick = (project) => {
+    const handleProjectClick = async (project) => {
         setSelectedProject(project);
         let currentProject = project._id;
-
-        axios.put("http://localhost:5000/api/v1/updateUser", { currentProject }, { headers })
-            .then((res) => {
-                const user = res.data.user;
-                dispatch(login({ user, token }))
-                let id = user.currentProject;
-                id = id.toString();
-                fetchProjectDetails(id);
-
-            })
-            .catch((error) => console.error(error))
-            .finally(() => {
-                closeModal(); // Close the modal after updating project details
-            });
+        const res = await putData("/updateuser", { currentProject })
+        const user = res.user;
+        dispatch(login({ user, token }))
+        let id = user.currentProject;
+        id = id.toString();
+        fetchProjectDetails(id);
+        closeModal()
     };
 
-    const fetchProjectDetails = (id) => {
-        axios.get(`http://localhost:5000/api/v1/getOneProject/${id}`, { headers })
-            .then((res) => {
-                const project = res.data.project;
-                console.log(project);
-                console.log("first")
-                dispatch(editProject({ project }));
-                setSelectedProject(res.data.project);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-
+    const fetchProjectDetails = async (id) => {
+        const res = await fetchData(`/getOneProject/${id}`)
+        const project = res.project
+        dispatch(editProject({ project }));
+        setSelectedProject(res.project);
     }
 
     return (
