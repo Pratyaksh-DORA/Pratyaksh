@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import { FormInput } from "../components"
 import { Link, useNavigate } from 'react-router-dom';
 import { GoWorkflow } from "react-icons/go";
+import { postData } from '../utilis/Api';
+import { signup } from '../features/AuthSlice';
+import { useDispatch } from 'react-redux';
 
 
 const Signup = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [values, setValues] = useState({
         username: "",
@@ -56,10 +60,14 @@ const Signup = () => {
         },
     ];
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        const res = await postData("/signup", values);
+        console.log(res)
+        const { user, token } = res;
+        dispatch(signup({ user, token }));
         console.log(values);
-        navigate("/main")
+        navigate("/onboarding")
     };
 
     const onChange = (e) => {

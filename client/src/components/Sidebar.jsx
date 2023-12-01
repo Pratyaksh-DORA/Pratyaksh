@@ -18,7 +18,7 @@ import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox } from "re
 const Sidebar = () => {
     const dispatch = useDispatch()
     const token = localStorage.getItem("token");
-    const { user } = useSelector((state) => state.auth);
+    const user = JSON.parse(localStorage.getItem("user"))
     let id = user.currentProject;
     id = id.toString()
     const [isCollapsed, setIsCollapsed] = useState(false);

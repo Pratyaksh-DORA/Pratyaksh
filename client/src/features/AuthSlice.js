@@ -16,18 +16,21 @@ export const authSlice = createSlice({
             state.user = action.payload.user;
             state.token = action.payload.token
             localStorage.setItem("token", action.payload.token);
+            localStorage.setItem("user", JSON.stringify(action.payload.user));
         },
         login: (state, action) => {
             state.isAuthenticated = true;
             state.user = action.payload.user;
             state.token = action.payload.token;
             localStorage.setItem("token", action.payload.token);
+            localStorage.setItem("user", JSON.stringify(action.payload.user));
 
         },
         logout: (state, action) => {
             state.isAuthenticated = false;
             state.token = null;
             localStorage.removeItem("token");
+            localStorage.removeItem("user");
         },
     }
 })
