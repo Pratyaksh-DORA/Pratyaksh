@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import { TaskTable } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { editProject } from '../features/ProjectSlice';
+import { putData } from '../utilis/Api';
 
 const Task = () => {
     const dispatch = useDispatch();
-    const { project } = useSelector((state) => state.project);
-    const milestones = project.project.milestones;
+    // const { project } = useSelector((state) => state.project);
+    const project = JSON.parse(localStorage.getItem("project"))
+    const milestones = project.milestones;
+    const id = project._id
 
     const [editedMilestones, setEditedMilestones] = useState([...milestones]);
 
@@ -19,9 +22,20 @@ const Task = () => {
         };
         setEditedMilestones(updatedMilestones);
     };
+    const handleAddMilestone = () => {
+        const newMilestone = {
+            name: "New Milestone",
+            tasks: [],
+        };
+        setEditedMilestones([...editedMilestones, newMilestone]);
+    };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         dispatch(editProject({ ...project, milestones: editedMilestones }));
+        console.log("first")
+        console.log(editedMilestones)
+        const res = await putData(`/updateProject/${id}`, { milestones: editedMilestones })
+        console.log(res)
     };
 
     return (
@@ -41,6 +55,9 @@ const Task = () => {
                     </div>
                 ))}
             </div>
+            <button onClick={handleAddMilestone} className="mt-4 p-2 border rounded-md">
+                Add Milestone
+            </button>
             <button onClick={handleSave} className="mt-4 p-2 border rounded-md">
                 Save
             </button>

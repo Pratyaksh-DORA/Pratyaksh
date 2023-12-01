@@ -2,18 +2,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    project: {
-        id: '',
-        name: '',
-        description: '',
-        location: {
-            type: '',
-            coordinates: [],
-        },
-        startDate: null,
-        endDate: null,
-        milestones: [],
+    _id: null,
+    name: '',
+    description: '',
+    location: {
+        type: '',
+        coordinates: [],
     },
+    startDate: null,
+    endDate: null,
+    milestones: [],
 };
 
 export const projectSlice = createSlice({
@@ -21,23 +19,19 @@ export const projectSlice = createSlice({
     initialState,
     reducers: {
         addProject: (state, action) => {
-            state.project.name = action.payload.name;
+            const newState = { ...state, ...action.payload };
+            localStorage.setItem("project", JSON.stringify(newState));
+            return newState;
         },
         editProject: (state, action) => {
-            state.project = action.payload;
-        },
-        editProjectTask: (state, action) => {
-            const { milestoneIndex, tasks } = action.payload;
-
-            // Ensure that milestones array exists before trying to access its index
-            if (state.project.milestones && state.project.milestones[milestoneIndex]) {
-                state.project.milestones[milestoneIndex].tasks = tasks;
-            }
+            const newState = { ...state, ...action.payload };
+            localStorage.setItem("project", JSON.stringify(newState));
+            return newState;
         },
     },
 });
 
-export const { addProject, editProject, editProjectTask } = projectSlice.actions;
-export const selectProject = (state) => state.project;
+export const { addProject, editProject } = projectSlice.actions;
+export const selectProject = (state) => state;
 
 export default projectSlice.reducer;

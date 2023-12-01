@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { editProjectTask } from "../features/ProjectSlice";
+import { editProject } from "../features/ProjectSlice";
+import { putData } from "../utilis/Api";
+
 
 const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
+    const project = JSON.parse(localStorage.getItem("project"))
+    const id = project._id
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const [editedTasks, setEditedTasks] = useState([...tasks]);
@@ -15,9 +19,20 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
         status: "",
     });
 
-    const handleTaskSave = () => {
-        dispatch(editProjectTask({ milestoneIndex, tasks: editedTasks }));
+    const handleTaskSave = async () => {
+        const milestones = JSON.parse(localStorage.getItem("project")).milestones.map((milestone, index) => {
+            if (index === milestoneIndex) {
+                return {
+                    ...milestone,
+                    tasks: editedTasks,
+                };
+            }
+            return milestone;
+        })
+        dispatch(editProject({ milestones: milestones }));
         setIsEditing(false);
+        const res = await putData(`/updateProject/${id}`, { milestones: milestones })
+        console.log(res)
     };
 
     const handleEdit = (taskIndex, fieldName, value) => {

@@ -32,7 +32,7 @@ const Sidebar = () => {
     useEffect(() => {
         const fetchDetails = async () => {
             const res = await fetchData("/getAllProjectofuser");
-            console.log(res)
+
             setProjects(res);
             let id = user.currentProject;
             id = id.toString()
@@ -71,7 +71,8 @@ const Sidebar = () => {
     const fetchProjectDetails = async (id) => {
         const res = await fetchData(`/getOneProject/${id}`)
         const project = res.project
-        dispatch(editProject({ project }));
+        console.log(project)
+        dispatch(editProject(project));
         setSelectedProject(res.project);
     }
 
