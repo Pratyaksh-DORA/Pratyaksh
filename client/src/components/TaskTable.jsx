@@ -69,7 +69,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
 
     return (
         <div>
-            <table className="table-fixed border-collapse border ">
+            <table className="table-fixed border-collapse border text-left">
                 <tbody>
                     <tr className="bg-gray-50">
                         <th className="w-1/6 border px-2 py-1 font-normal">Name</th>
@@ -98,11 +98,12 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                                         onChange={(e) => handleEdit(index, "description", e.target.value)}
                                     />
                                 </td>
-                                <td className="border px-2 py-1 cursor-pointer">
+                                <td className="border px-2 py-1 ">
                                     <DatePicker
+                                        className="w-full focus:outline-none cursor-pointer"
                                         selected={task.dueDate ? new Date(task.dueDate) : null}
                                         onChange={(date) => handleEdit(index, "dueDate", date)}
-                                        dateFormat="dd-MM-yyyy"  // Change the date format here
+                                        dateFormat="dd-MM-yyyy"
                                     />
                                 </td>
                                 <td className="border px-2 py-1">
@@ -124,6 +125,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                                         <option value="High">High</option>
                                         <option value="Urgent">Urgent</option>
                                     </select>
+
                                 </td>
                                 <td className="border px-2 py-1">
                                     <select

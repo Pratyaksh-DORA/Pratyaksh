@@ -7,7 +7,6 @@ const BASE_URL = 'http://localhost:5000/api/v1';
 export const fetchData = async (endpoint, options = {}) => {
     try {
         const token = localStorage.getItem("token");
-        console.log("token from api", token)
         const response = await axios.get(`${BASE_URL}/${endpoint}`, {
             headers: {
                 'Content-Type': 'application/json',
