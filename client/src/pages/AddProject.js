@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { FormInput } from "../components"
 import { useNavigate, } from 'react-router-dom';
 import { useDispatch, } from 'react-redux';
-import { addProject } from '../features/ProjectSlice';
+import { addProject, editProject } from '../features/ProjectSlice';
+import { login } from "../features/AuthSlice"
 import { fetchData, postData, putData } from '../utilis/Api';
 
 
@@ -34,18 +35,29 @@ const AddProject = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const res = await postData('/addProject', { name: values.name })
-            const id = res.project._id;
-            // const res1 = await putData('/updateUser', { currentProject: id })
+        console.log(values)
+        console.log(" 1s")
+        const addProjectRes = await postData("/addProject", { name: values.name })
+        console.log(addProjectRes.project._id)
+        let currentProject = addProjectRes.project._id;
+        dispatch(addProject(values.name, currentProject))
 
-            dispatch(addProject(values.name, id));
-            navigate(`/${id}`);
-        }
-        catch (error) {
-            console.error('Error posting data:', error);
-        }
-    }
+        console.log(" 2s")
+        const updateUserRes = await putData('/updateUser', { currentProject });
+        const user = updateUserRes.user;
+        dispatch(login({ user }));
+
+        console.log("3s");
+        currentProject = currentProject.toString()
+        console.log(currentProject)
+        const getProjectRes = await fetchData(`/getOneProject/${currentProject}`);
+        const project = getProjectRes.project;
+        dispatch(editProject(project));
+        console.log("4s")
+        navigate(`/${currentProject}`);
+
+    };
+
 
 
 

@@ -52,7 +52,6 @@ const projectSchema = new mongoose.Schema({
                     assigned: {
                         type: mongoose.Schema.ObjectId,
                         ref: "User",
-                        required: true
 
                     },
                     priority: {

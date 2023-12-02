@@ -44,6 +44,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const res = await postData("/login", values);
+        console.log("loginres:", res)
         const { user, token } = res;
         dispatch(login({ user, token }));
         if (user.currentProject.length !== 0) {

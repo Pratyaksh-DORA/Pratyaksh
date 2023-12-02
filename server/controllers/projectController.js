@@ -95,8 +95,15 @@ exports.updateProject = async (req, res, next) => {
     if (startDate) project.startDate = startDate;
     if (endDate) project.endDate = endDate;
     if (status) project.status = status;
-    if (milestones) project.milestones = milestones;
-
+    if (milestones) {
+        milestones.forEach((milestone) => {
+            milestone.tasks.forEach((task) => {
+                // Convert empty strings to null for the 'assigned' field
+                task.assigned = task.assigned || null;
+            });
+        });
+        project.milestones = milestones;
+    }
 
     await project.save();
 

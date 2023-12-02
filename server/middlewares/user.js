@@ -13,6 +13,7 @@ exports.isLoggedIn = async (req, res, next) => {
     if (!token) {
         return (next(new CustomError("Login to access this page", 401)));
     }
+    console.log("token:", token)
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 

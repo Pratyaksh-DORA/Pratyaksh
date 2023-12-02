@@ -19,19 +19,31 @@ export const projectSlice = createSlice({
     initialState,
     reducers: {
         addProject: (state, action) => {
-            const newState = { ...state, ...action.payload };
-            localStorage.setItem("project", JSON.stringify(newState));
-            return newState;
+            const { _id, name, description, location, startDate, endDate, milestones } = action.payload;
+            state._id = _id;
+            state.name = name;
+            state.description = description;
+            state.location = location;
+            state.startDate = startDate;
+            state.endDate = endDate;
+            state.milestones = milestones;
+            localStorage.setItem("project", JSON.stringify(state));
         },
         editProject: (state, action) => {
-            const newState = { ...state, ...action.payload };
-            localStorage.setItem("project", JSON.stringify(newState));
-            return newState;
+            const { name, _id, description, location, startDate, endDate, milestones } = action.payload;
+            state._id = _id;
+            state.name = name;
+            state.description = description;
+            state.location = location;
+            state.startDate = startDate;
+            state.endDate = endDate;
+            state.milestones = milestones;
+            localStorage.setItem("project", JSON.stringify(state));
         },
     },
 });
 
 export const { addProject, editProject } = projectSlice.actions;
-export const selectProject = (state) => state;
+export const selectProject = (state) => state.project;
 
 export default projectSlice.reducer;

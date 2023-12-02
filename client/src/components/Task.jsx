@@ -21,22 +21,32 @@ const Task = () => {
             [fieldName]: value,
         };
         setEditedMilestones(updatedMilestones);
+        dispatch(editProject({ ...project, milestones: updatedMilestones }));
     };
     const handleAddMilestone = () => {
         const newMilestone = {
             name: "New Milestone",
             tasks: [],
         };
-        setEditedMilestones([...editedMilestones, newMilestone]);
+        const updatedMilestones = [...editedMilestones, newMilestone];
+        setEditedMilestones(updatedMilestones);
+
+        // Update Redux state immediately after adding a new milestone
+        dispatch(editProject({ ...project, milestones: updatedMilestones }));
     };
 
     const handleSave = async () => {
-        dispatch(editProject({ ...project, milestones: editedMilestones }));
-        console.log("first")
-        console.log(editedMilestones)
-        const res = await putData(`/updateProject/${id}`, { milestones: editedMilestones })
-        console.log(res)
+        const updatedProject = JSON.parse(localStorage.getItem("project"))
+
+        // Send the updated project data to the backend
+        try {
+            const res = await putData(`/updateProject/${id}`, updatedProject);
+            console.log(res);
+        } catch (error) {
+            console.error("Error updating project on the backend:", error);
+        }
     };
+
 
     return (
         <div>

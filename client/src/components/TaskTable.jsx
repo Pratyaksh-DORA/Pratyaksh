@@ -20,7 +20,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
     });
 
     const handleTaskSave = async () => {
-        const milestones = JSON.parse(localStorage.getItem("project")).milestones.map((milestone, index) => {
+        const updatedMilestones = project.milestones.map((milestone, index) => {
             if (index === milestoneIndex) {
                 return {
                     ...milestone,
@@ -28,11 +28,19 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                 };
             }
             return milestone;
-        })
-        dispatch(editProject({ milestones: milestones }));
+        });
+
+        const updatedProject = {
+            ...project,
+            milestones: updatedMilestones,
+        };
+
+        dispatch(editProject(updatedProject));
         setIsEditing(false);
-        const res = await putData(`/updateProject/${id}`, { milestones: milestones })
-        console.log(res)
+
+        // Assuming you have an API endpoint to update the project with new data
+        // const res = await putData(`/updateProject/${id}`, { milestones: updatedMilestones })
+        // console.log(res)
     };
 
     const handleEdit = (taskIndex, fieldName, value) => {
