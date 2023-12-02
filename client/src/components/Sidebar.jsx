@@ -18,7 +18,8 @@ import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox } from "re
 const Sidebar = () => {
     const dispatch = useDispatch()
     const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"))
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("sidebar", user)
     let id = user.currentProject;
     id = id.toString()
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -61,7 +62,7 @@ const Sidebar = () => {
         let currentProject = project._id;
         const res = await putData("/updateuser", { currentProject })
         const user = res.user;
-        dispatch(login({ user, token }))
+        dispatch(login({ user }))
         let id = user.currentProject;
         id = id.toString();
         fetchProjectDetails(id);

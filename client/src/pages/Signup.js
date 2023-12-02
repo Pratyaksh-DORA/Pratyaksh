@@ -65,7 +65,7 @@ const Signup = () => {
         const res = await postData("/signup", values);
         console.log("signupres", res)
         const { user, token } = res;
-        dispatch(login({ user, token }));
+        dispatch(signup({ user, token }));
         console.log(values);
         navigate("/onboarding")
     };

@@ -44,8 +44,10 @@ const AddProject = () => {
 
         console.log(" 2s")
         const updateUserRes = await putData('/updateUser', { currentProject });
+        console.log(updateUserRes)
         const user = updateUserRes.user;
         dispatch(login({ user }));
+        console.log("2s:", user)
 
         console.log("3s");
         currentProject = currentProject.toString()
