@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaBars, } from 'react-icons/fa';
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { login } from "../features/AuthSlice"
 import { editProject } from "../features/ProjectSlice"
@@ -17,7 +17,6 @@ import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox } from "re
 
 const Sidebar = () => {
     const dispatch = useDispatch()
-    const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
     console.log("sidebar", user)
     let id = user.currentProject;

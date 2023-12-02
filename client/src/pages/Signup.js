@@ -3,7 +3,7 @@ import { FormInput } from "../components"
 import { Link, useNavigate } from 'react-router-dom';
 import { GoWorkflow } from "react-icons/go";
 import { postData } from '../utilis/Api';
-import { signup, login } from '../features/AuthSlice';
+import { signup } from '../features/AuthSlice';
 import { useDispatch } from 'react-redux';
 
 

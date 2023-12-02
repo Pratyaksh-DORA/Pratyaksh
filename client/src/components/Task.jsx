@@ -1,7 +1,7 @@
 // Task.jsx
 import React, { useState } from 'react';
 import { TaskTable } from '../components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { editProject } from '../features/ProjectSlice';
 import { putData } from '../utilis/Api';
 

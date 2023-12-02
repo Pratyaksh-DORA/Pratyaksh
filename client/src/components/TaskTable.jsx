@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editProject } from "../features/ProjectSlice";
-import { putData } from "../utilis/Api";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+
+
 
 
 const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
     const project = JSON.parse(localStorage.getItem("project"))
-    const id = project._id
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const [editedTasks, setEditedTasks] = useState([...tasks]);
@@ -15,7 +18,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
         description: "",
         dueDate: "",
         assigned: "",
-        priority: "",
+        priority: "Low",
         status: "",
     });
 
@@ -38,9 +41,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
         dispatch(editProject(updatedProject));
         setIsEditing(false);
 
-        // Assuming you have an API endpoint to update the project with new data
-        // const res = await putData(`/updateProject/${id}`, { milestones: updatedMilestones })
-        // console.log(res)
+
     };
 
     const handleEdit = (taskIndex, fieldName, value) => {
@@ -60,7 +61,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
             description: "",
             dueDate: "",
             assigned: "",
-            priority: "",
+            priority: "Low",
             status: "",
         });
         setIsEditing(true);
@@ -97,12 +98,11 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                                         onChange={(e) => handleEdit(index, "description", e.target.value)}
                                     />
                                 </td>
-                                <td className="border px-2 py-1">
-                                    <input
-                                        className="w-full focus:outline-none"
-                                        type="text"
-                                        value={task.dueDate}
-                                        onChange={(e) => handleEdit(index, "dueDate", e.target.value)}
+                                <td className="border px-2 py-1 cursor-pointer">
+                                    <DatePicker
+                                        selected={task.dueDate ? new Date(task.dueDate) : null}
+                                        onChange={(date) => handleEdit(index, "dueDate", date)}
+                                        dateFormat="dd-MM-yyyy"  // Change the date format here
                                     />
                                 </td>
                                 <td className="border px-2 py-1">
@@ -114,21 +114,31 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                                     />
                                 </td>
                                 <td className="border px-2 py-1">
-                                    <input
-                                        className="w-full focus:outline-none"
-                                        type="text"
+                                    <select
+                                        className="w-full focus:outline-none appearance-none cursor-pointer"
                                         value={task.priority}
                                         onChange={(e) => handleEdit(index, "priority", e.target.value)}
-                                    />
+                                    >
+                                        <option value="Low">Low</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="High">High</option>
+                                        <option value="Urgent">Urgent</option>
+                                    </select>
                                 </td>
                                 <td className="border px-2 py-1">
-                                    <input
-                                        className="w-full focus:outline-none"
-                                        type="text"
+                                    <select
+                                        className="w-full focus:outline-none appearance-none cursor-pointer"
                                         value={task.status}
                                         onChange={(e) => handleEdit(index, "status", e.target.value)}
-                                    />
+                                    >
+                                        <option value="Planning">Planning</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Paused">Paused</option>
+                                        <option value="Done">Done</option>
+                                        <option value="Canceled">Canceled</option>
+                                    </select>
                                 </td>
+
                             </tr>
                         ))}
                     <tr onClick={handleAddNewTask} className=" cursor-pointer hover:bg-gray-100">

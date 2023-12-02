@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 const CustomError = require("../utilis/customError");
 
 exports.isLoggedIn = async (req, res, next) => {
-    let token = req.cookies.token;
+    let token
 
-    if (!token && req.header("Authorization")) {
+    if (req.header("Authorization")) {
         token = req.header("Authorization").replace("Bearer ", "").trim();
 
     }
