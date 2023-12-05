@@ -111,3 +111,11 @@ exports.updateProject = async (req, res, next) => {
     res.status(200).json({ success: true, project });
 
 }
+
+exports.getAllProjects = async (req, res, next) => {
+    const projects = await Project.find({});
+    res.status(200).json({
+        sucess: true,
+        projects
+    })
+}

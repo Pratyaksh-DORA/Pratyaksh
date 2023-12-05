@@ -92,9 +92,47 @@ exports.changePassword = async (req, res, next) => {
 
 }
 
+exports.updateUser = async (req, res, next) => {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+    const { username, currentProject, projects, email } = req.body;
+
+    if (username) {
+        const fetchedUsername = await User.findOne({ username });
+        if (fetchedUsername) {
+            return (next(new CustomError(stringConstants.usernameExsist, 400)))
+        }
+        user.username = username;
+    }
+    if (email) {
+        const fetchedEmail = await User.findOne({ email })
+        if (fetchedEmail) {
+            return (next(new CustomError(stringConstants.emailExsist, 400)))
+        }
+        user.email = email;
+    }
+    if (currentProject) {
+        user.currentProject = currentProject;
+    }
+    if (projects) {
+        user.projects = projects;
+    }
+    await user.save();
+
+    res.status(200).json({
+        success: true,
+        message: "User profile updated successfully",
+        user,
+    });
+
+
+
+
+}
+
 exports.createUser = async (req, res, next) => {
 
-    const { role, id, currentProject } = req.user
+    const { role, currentProject } = req.user
     let userRole = "projectManager";
     if (role == "projectManager") {
         userRole = "dataEntry"
@@ -158,40 +196,3 @@ exports.createUser = async (req, res, next) => {
     res.status(200).json(user);
 }
 
-exports.updateUser = async (req, res, next) => {
-    const userId = req.user.id;
-    const user = await User.findById(userId);
-    const { username, currentProject, projects, email } = req.body;
-
-    if (username) {
-        const fetchedUsername = await User.findOne({ username });
-        if (fetchedUsername) {
-            return (next(new CustomError(stringConstants.usernameExsist, 400)))
-        }
-        user.username = username;
-    }
-    if (email) {
-        const fetchedEmail = await User.findOne({ email })
-        if (fetchedEmail) {
-            return (next(new CustomError(stringConstants.emailExsist, 400)))
-        }
-        user.email = email;
-    }
-    if (currentProject) {
-        user.currentProject = currentProject;
-    }
-    if (projects) {
-        user.projects = projects;
-    }
-    await user.save();
-
-    res.status(200).json({
-        success: true,
-        message: "User profile updated successfully",
-        user,
-    });
-
-
-
-
-}

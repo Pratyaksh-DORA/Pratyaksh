@@ -3,8 +3,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-FLOW is an Agile Workspace that empowers teams to collaborate seamlessly and accelerate productivity.  
-With FLOW, teams can efficiently track their progress while maintaining control over their data.
+FLOW is an Agile Workspace that empowers software teams to collaborate seamlessly and accelerate productivity.  
+With FLOW, teams can efficiently track their progress and bugs while maintaining control over their data.
 
 ## Table of Contents
 
