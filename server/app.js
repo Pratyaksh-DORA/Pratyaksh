@@ -29,4 +29,4 @@ app.use("/api/v1", user);
 app.use("/api/v1", project);
 app.use("/api/v1", projectUpdate);
 
-module.exports = app
+module.exports = app;
