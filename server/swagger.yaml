@@ -279,7 +279,7 @@ paths:
             description: The unique identifier of the project.
             required: true
             schema:
-            type: string
+              type: string
         responses:
         '200':
           description: Successfully Retrieved Project
