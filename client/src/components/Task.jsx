@@ -49,7 +49,7 @@ const Task = () => {
 
 
     return (
-        <div>
+        <div className='p-4'>
             <div>
                 {editedMilestones.map((milestone, index) => (
                     <div key={index} className='mt-8'>

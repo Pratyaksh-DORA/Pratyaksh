@@ -98,7 +98,7 @@ const Team = () => {
     };
 
     return (
-        <div>
+        <div className='p-4'>
             <div className="bg-gray-50 p-4">
 
                 <table className='w-full border-collapse border'>
