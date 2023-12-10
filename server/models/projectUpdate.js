@@ -42,7 +42,20 @@ const projectUpdateSchema = new mongoose.Schema({
                 default: 'low'
             }
         }
-    ]
+    ],
+    siteImages: [
+        {
+            sitePlan: String,
+            id: {
+                type: String,
+                required: true,
+            },
+            secure_url: {
+                type: String,
+                required: true,
+            },
+        },
+    ],
 
 });
 

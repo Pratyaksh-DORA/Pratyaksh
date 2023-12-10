@@ -1,16 +1,15 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { FaBars, } from 'react-icons/fa';
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { useDispatch } from 'react-redux';
-
 import { login } from "../features/AuthSlice"
 import { editProject } from "../features/ProjectSlice"
 import Modal from './Modal';
 import { fetchData, putData } from '../utilis/Api';
 import { Link } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa6";
-import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox } from "react-icons/md";
+import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox, MdOutlineDashboard } from "react-icons/md";
+import { PiGraphDuotone } from "react-icons/pi";
 
 
 
@@ -109,12 +108,15 @@ const Sidebar = () => {
             {!isCollapsed && (
                 <div className="p-4 text-md font-semibold gap-5 flex flex-col">
 
-
+                    <Link to={`/${id}`} className='flex gap-2 items-center '><MdOutlineDashboard /> Dashboard</Link>
                     <Link to={`/${id}/task`} className='flex gap-2 items-center '><MdOutlineCheckBox /> Tasks</Link>
                     <Link to={`/${id}/team`} className='flex gap-2 items-center '> <FaRegUser />Team</Link>
                     <Link to={`/${id}/update`} className='flex gap-2 items-center '><MdUpdate /> Updates</Link>
                     <Link to={`/${id}/analysis`} className='flex gap-2 items-center '><MdBarChart /> Analysis</Link>
+
+                    <Link to={`/${id}/simulator`} className='flex gap-2 items-center '><PiGraphDuotone /> Simulator</Link>
                     <Link to={`/${id}/chat`} className='flex gap-2 items-center '><MdChatBubbleOutline /> Chats</Link>
+
 
                 </div>
             )}
