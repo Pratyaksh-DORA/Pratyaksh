@@ -13,23 +13,23 @@ const projectUpdateSchema = new mongoose.Schema({
     },
     updateDate: {
         type: Date,
-        required: true,
+        // required: true,
         default: Date.now()
     },
     progressPercentage: {
         type: Number,
-        required: true,
+        // required: true,
         default: 0
     },
     externalFactors: [
         {
             name: {
                 type: String,
-                required: true
+                // required: true
             },
             description: {
                 type: String,
-                required: true
+                // required: true
             },
             impact: {
                 type: String,
@@ -48,12 +48,15 @@ const projectUpdateSchema = new mongoose.Schema({
             sitePlan: String,
             id: {
                 type: String,
-                required: true,
+                // required: true,
             },
             secure_url: {
                 type: String,
-                required: true,
+                // required: true,
             },
+            coordinates: {
+                type: [Number],
+            }
         },
     ],
 
