@@ -64,7 +64,7 @@ const AddProject = () => {
 
 
     return (
-        <div className='flex justify-center items-center h-screen bg-secondary'>
+        <div className='flex justify-center items-center h-screen bg-background'>
             <div className='flex flex-col items-center justify-center gap-4'>
                 <p className='text-3xl font-semibold '>Create a team project</p>
 

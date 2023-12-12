@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import { Landing, Signup, Login, Main, AddProject } from "./pages";
-import { Analysis, Chat, Task, Team, Update, Home } from "./components";
+import { Landing, Signup, Login, Main, AddProject, Analysis, Chat, Task, Team, Update, Home } from "./pages";
+
 import { Provider } from "react-redux";
 import { store } from "./store/store"
 

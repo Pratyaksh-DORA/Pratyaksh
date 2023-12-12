@@ -41,7 +41,7 @@ const Modal = ({ projects, closeModal, position, parentRef, onProjectClick }) =>
 
 
     return (
-        <div style={modalStyle} className="bg-white p-4 rounded-lg">
+        <div style={modalStyle} className="bg-white p-4 rounded-lg text-black">
             <div className="flex flex-col">
                 {projects.map((project) => (
                     <Link key={project._id} to={`/${project._id}`} onClick={() => onProjectClick(project)}>
