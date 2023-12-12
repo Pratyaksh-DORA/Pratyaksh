@@ -275,50 +275,92 @@ paths:
           - projects
         parameters:
           - name: projectId
-            in: query
+            in: url
             description: The unique identifier of the project.
             required: true
             schema:
-            type: string
+              type: string
         responses:
         '200':
           description: Successfully Retrieved Project
           content:     
             application/json:
-              example:
-                success: true
-                project:
-                  location:
-                    coordinates: []
-                  _id: "656b2a98920f5e1d32a0494f"
-                  name: "drama"
-                  status: "Not Started"
-                  user: "656af3b953e245d05e4f89da"
-                  milestones:
-                    - name: "New Milestone 1"
-                      status: "Not Started"
-                      tasks:
-                        - name: "this is fine"
-                          description: "wtf"
-                          dueDate: "2023-10-31T18:30:00.000Z"
-                          assigned: null
-                          priority: "Medium"
-                          status: ""
-                      _id: "656b2c302b0cc562eea1f7fb"
-                    # ... Include other milestones as needed
-                  __v: 8
-                updatedUser:
-                  _id: "656af3b953e245d05e4f89da"
-                  username: "krishna"
-                  email: "krishna@gmail.com"
-                  password: "$2b$10$Vf5VAOEhCytI7tU29x4y6O9a/w5M7mGTTuQ01jXV0a4kuuvJ1ZMgC"
-                  role: "admin"
-                  currentProject: "656b2a98920f5e1d32a0494f"
-                  projects:
-                    - "656af3c353e245d05e4f89de"
-                    - "656b2a6754588e75adf8ee95"
-                    - "656b2a98920f5e1d32a0494f"
-                  __v: 0
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  project:
+                    type: object
+                    properties:
+                      location:
+                        type: object
+                        properties:
+                          coordinates:
+                            type: array
+                            items: {} # You need to define the structure of coordinates if applicable
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      status:
+                        type: string
+                      user:
+                        type: string
+                      milestones:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            status:
+                              type: string
+                            tasks:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  description:
+                                    type: string
+                                  dueDate:
+                                    type: string
+                                    format: date-time
+                                  assigned:
+                                    type: string
+                                  priority:
+                                    type: string
+                                  status:
+                                    type: string
+                                  _id:
+                                    type: string
+                            _id:
+                              type: string
+                      __v:
+                        type: integer
+                  updatedUser:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      password:
+                        type: string
+                      role:
+                        type: string
+                      currentProject:
+                        type: string
+                      projects:
+                        type: array
+                        items:
+                          type: string
+                      __v:
+                        type: integer
                   
         '400':
           description: Bad Request

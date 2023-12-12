@@ -2,7 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser")
 const connectWithDatabase = require("./config/db")
 const cors = require("cors")
-
+const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv").config();
 const app = express();
 
@@ -19,6 +19,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(
+    fileUpload({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+    })
+);
 app.use(cookieParser());
 
 const user = require("./routes/user");

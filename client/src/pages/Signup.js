@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FormInput } from "../components"
 import { Link, useNavigate } from 'react-router-dom';
-import { GoWorkflow } from "react-icons/go";
+import pratyakshLogo from "../assets/PratyakshLogo.png"
 import { postData } from '../utilis/Api';
 import { signup } from '../features/AuthSlice';
 import { useDispatch } from 'react-redux';
@@ -76,9 +76,10 @@ const Signup = () => {
 
 
     return (
-        <div className='h-screen'>
+        <div className='h-screen bg-background'>
             <div className='flex justify-between px-24 pt-6'>
-                <Link to="/" className='font-bold flex justify-center items-center text-2xl gap-1'><GoWorkflow />Flow</Link>
+                <Link to="/" className=' '>
+                    <img src={pratyakshLogo} className='w-28' /></Link>
             </div>
             <div className='flex justify-center items-center mt-24 '>
                 <div>

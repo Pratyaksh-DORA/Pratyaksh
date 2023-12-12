@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { useDispatch } from "react-redux";
-
 import { login } from "../features/AuthSlice";
 import { editProject } from "../features/ProjectSlice";
 import Modal from "./Modal";
@@ -16,6 +15,7 @@ import {
   MdOutlineCheckBox,
 } from "react-icons/md";
 import { TbReport } from "react-icons/tb";
+
 
 
 const Sidebar = () => {
@@ -99,6 +99,7 @@ const Sidebar = () => {
                 parentRef={buttonRef}
                 onProjectClick={handleProjectClick}
               />
+
             )}
           </div>
         )}

@@ -66,6 +66,19 @@ const projectSchema = new mongoose.Schema({
                 },]
         }
     ],
+    sitePlan: [
+        {
+            name: String,
+            id: {
+                type: String,
+
+            },
+            secure_url: {
+                type: String,
+
+            },
+        },
+    ],
     user: {
         type: mongoose.Schema.ObjectId,
         ref: "User",
