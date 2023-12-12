@@ -76,7 +76,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className={` text-white h-screen ${isCollapsed ? 'w-16 bg-white' : 'w-52 bg-primary'} transition-all`}>
+        <div className={` text-white h-screen  ${isCollapsed ? 'w-16 bg-white' : 'w-52 bg-primary'} transition-all`}>
             <div className="p-4 flex justify-between items-center">
 
                 {!isCollapsed &&
