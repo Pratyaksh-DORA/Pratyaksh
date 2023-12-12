@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { fetchData, postData, } from '../utilis/Api';
-import FormInput from './FormInput';
+import FormInput from '../components/FormInput';
 import { MdOutlineEdit } from "react-icons/md";
 import { MdOutlineClose } from "react-icons/md";
 import { IoTrashOutline } from "react-icons/io5";
