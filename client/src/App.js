@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import { Landing, Signup, Login, Main, AddProject } from "./pages";
+import { Landing, Signup, Login, Main, AddProject, Report } from "./pages";
 import { Analysis, Chat, Task, Team, Update } from "./components";
 import { Provider } from "react-redux";
 import { store } from "./store/store"
@@ -21,6 +21,8 @@ function App() {
               <Route path="update" element={<Update />} />
               <Route path="analysis" element={<Analysis />} />
               <Route path="chat" element={<Chat />} />
+              <Route path="report" element={<Report />} />
+
             </Route>
           </Routes>
         </Router>
