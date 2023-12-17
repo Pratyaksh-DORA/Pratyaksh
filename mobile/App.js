@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { FormDataProvider } from './src/redux/FormDataContext';
+import Login from './src/screens/Login';
+import Form from './src/components/Form';
+import TagImage from './src/components/TagImage';
+import MarkedPoints from './src/components/MarkedPoints';
+import ImageCapture from './src/components/ImageCapture';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Welcome to Pratyaksh!!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <FormDataProvider>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="Form" component={Form} />
+          <Stack.Screen name="TagImage" component={TagImage} />
+          <Stack.Screen name="MarkedPoints" component={MarkedPoints} />
+          <Stack.Screen name="ImageCapture" component={ImageCapture} />
+        </Stack.Navigator>
+      </FormDataProvider>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
