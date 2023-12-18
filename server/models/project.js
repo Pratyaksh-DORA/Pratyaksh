@@ -11,6 +11,9 @@ const projectSchema = new mongoose.Schema({
     category: {
         type: String
     },
+    sector: {
+        type: String,
+    },
     location: {
         type: {
             type: String,
