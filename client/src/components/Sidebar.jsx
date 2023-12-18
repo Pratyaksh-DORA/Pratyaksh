@@ -116,6 +116,7 @@ const Sidebar = () => {
 
                     <Link to={`/${id}/simulator`} className='flex gap-2 items-center '><PiGraphDuotone /> Simulator</Link>
                     <Link to={`/${id}/chat`} className='flex gap-2 items-center '><MdChatBubbleOutline /> Chats</Link>
+                    <Link to={`/${id}/report`} className='flex gap-2 items-center '><MdChatBubbleOutline /> Reports </Link>
 
 
                 </div>

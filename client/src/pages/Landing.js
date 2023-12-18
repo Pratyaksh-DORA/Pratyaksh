@@ -6,7 +6,6 @@ import Description from "../components/Description";
 const Landing = () => {
   return (
     <>
-      {" "}
       <section
         className="h-3/4 md:h-screen"
         style={{
@@ -15,11 +14,9 @@ const Landing = () => {
           backgroundPosition: "center", // Center the background image
         }}
       >
-        {" "}
         <TopNavbar />
         <div className=" flex items-center justify-center mt-64 ">
           <p className="bg-white opacity-90 p-4 text-lg font-bold text-black">
-            {" "}
             Real-Time Progress Monitoring, AI Scheduling, and Smart
             Decision-Making
           </p>
