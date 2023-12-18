@@ -8,6 +8,9 @@ const projectSchema = new mongoose.Schema({
     description: {
         type: String,
     },
+    category: {
+        type: String
+    },
     location: {
         type: {
             type: String,
