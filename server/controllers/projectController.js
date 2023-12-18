@@ -96,6 +96,7 @@ exports.updateProject = async (req, res, next) => {
     if (endDate) project.endDate = endDate;
     if (status) project.status = status;
     if (category) project.category = category;
+    if (sector) project.sector = sector;
     if (milestones) {
         milestones.forEach((milestone) => {
             milestone.tasks.forEach((task) => {
