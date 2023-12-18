@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaBars, } from 'react-icons/fa';
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { FaMapMarkedAlt } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { login } from "../features/AuthSlice"
 import { editProject } from "../features/ProjectSlice"
@@ -113,7 +114,7 @@ const Sidebar = () => {
                     <Link to={`/${id}/team`} className='flex gap-2 items-center '> <FaRegUser />Team</Link>
                     <Link to={`/${id}/update`} className='flex gap-2 items-center '><MdUpdate /> Updates</Link>
                     <Link to={`/${id}/analysis`} className='flex gap-2 items-center '><MdBarChart /> Analysis</Link>
-
+                    <Link to={`/${id}/gis`} className='flex gap-2 items-center '><FaMapMarkedAlt /> GIS </Link>
                     <Link to={`/${id}/simulator`} className='flex gap-2 items-center '><PiGraphDuotone /> Simulator</Link>
                     <Link to={`/${id}/chat`} className='flex gap-2 items-center '><MdChatBubbleOutline /> Chats</Link>
                     <Link to={`/${id}/report`} className='flex gap-2 items-center '><MdChatBubbleOutline /> Reports </Link>
