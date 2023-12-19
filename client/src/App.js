@@ -1,16 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Landing, Signup, Login, Main, AddProject, Analysis, Chat, Task, Team, Update, Home, Admin, GIS, Report, Setting } from "./pages";
 
 import Milestone from "./pages/Milestone";
 
 import { Provider } from "react-redux";
+
 import { store } from "./store/store"
+import ImageTagging from "./components/ImageTagging";
 
 function App() {
-
   return (
-    <Provider store={store} >
+    <Provider store={store}>
       <div className="h-screen">
         <Router>
           <Routes>
@@ -30,14 +31,14 @@ function App() {
               <Route path="simulator" element={<Analysis />} />
               <Route path="chat" element={<Chat />} />
               <Route path="report" element={<Report />} />
+              <Route path="imageTagging" element={<ImageTagging />} />
               <Route path="setting" element={<Setting />} />
             </Route>
 
           </Routes>
         </Router>
       </div>
-    </Provider >
-
+    </Provider>
   );
 }
 

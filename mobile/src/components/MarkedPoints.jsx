@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'; // Import ScrollView
 import { useNavigation, CommonActions } from '@react-navigation/native';
 import { useFormData } from '../redux/FormDataContext';
+import axios from 'axios';
+
 
 const MarkedPoints = () => {
     const navigation = useNavigation();
@@ -10,16 +12,22 @@ const MarkedPoints = () => {
     // State to track whether an image is captured for each point
     const [imageCaptured, setImageCaptured] = useState({});
 
-
     const handleCapture = (pointId) => {
         navigation.navigate('ImageCapture', { pointId: pointId });
         setImageCaptured(prevState => ({ ...prevState, [pointId]: true }));
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         alert("Data submitted Successfully!!");
         console.log(state);
-        navigation.navigate('Login');
+        try {
+            // const response = await axios.post('http://localhost:5000/api/v1/addProjectUpdate', state);
+            // console.log(response.data);
+            console.log(state);
+        } catch (error) {
+            console.error(error);
+        }
+        navigation.navigate('MaterialsForm');
     }
 
     return (

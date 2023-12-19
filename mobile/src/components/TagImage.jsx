@@ -8,16 +8,16 @@ import uuid from 'react-native-uuid';
 
 const imagesList = [
     {
-        name: "Test1",
+        name: "Floor Plan 1",
         path: require("../../assets/test.jpg")
     },
     {
-        name: "Test2",
-        path: require("../../assets/splash.png")
+        name: "Floor Plan 2",
+        path: require("../../assets/Cat1_10.jpg")
     },
     { 
-        name: "Test3", 
-        path: require("../../assets/favicon.png")
+        name: "Floor Plan 3", 
+        path: require("../../assets/Cat1_5.jpg")
     }
 ];
 

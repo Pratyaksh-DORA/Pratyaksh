@@ -1,28 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
-import axios from 'axios';
-import { useNavigation } from '@react-navigation/native'; 
+import { useNavigation, useFocusEffect } from '@react-navigation/native'; 
 const pratyakshLogo = require("../../assets/logo192.png");
+import { useFormData } from '../redux/FormDataContext';
+import axios from 'axios';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const { state, dispatch } = useFormData();
 
     const navigation = useNavigation();
 
+    useEffect(() => {
+        setUsername('');
+        setPassword('');
+        setError('');
+    }, []);
+
+    useFocusEffect(
+        React.useCallback(() => {
+          setUsername('');
+          setPassword('');
+          setError('');
+        }, [])
+    );
+
     const handleLogin = async () => {
     try {
-        // const response = await axios.post('https://pratyaksh-production.up.railway.app/api/v1/login', {
-        //     username: username,
-        //     password: password,
-        // });
-        // console.log(response);
-        response = true;
+        console.log(username, password);
+        const response = await axios.post('http://localhost:5000/api/v1/login', {
+            username: username,
+            password: password,
+        });
+        // Krishna@1370
+        // krishna
 
         if (response) {
             console.log('Login successful', response.data);
-            navigation.navigate('Form');
+            // state.projectId = response.data.user.currentProject;
+            // state.userId = response.data.user._id;
+            navigation.navigate('MaterialsForm');
         }
     } catch (error) {
         console.error('Login error', error);

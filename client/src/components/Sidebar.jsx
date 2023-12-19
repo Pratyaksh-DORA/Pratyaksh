@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FaBars, } from 'react-icons/fa';
+import React, { useState, useRef, useEffect } from "react";
+import { FaBars } from "react-icons/fa";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
@@ -13,22 +13,17 @@ import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox, MdOutline
 import { PiGraphDuotone } from "react-icons/pi";
 import ProjectDetails from './ProjectDetails';
 import Modal from 'react-modal';
+const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
 
-
-
-const Sidebar = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log("sidebar", user)
     let id = user.currentProject;
-    id = id.toString()
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    id = id.toString();
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
     const [projects, setProjects] = useState([]);
     const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
     const buttonRef = useRef();
-
 
     useEffect(() => {
         const fetchDetails = async () => {
@@ -36,12 +31,11 @@ const Sidebar = () => {
 
             setProjects(res);
             let id = user.currentProject;
-            id = id.toString()
+            id = id.toString();
             fetchProjectDetails(id);
-        }
-        fetchDetails()
-
-    }, [])
+        };
+        fetchDetails();
+    }, []);
 
     const openModal = () => {
         const buttonRect = buttonRef.current.getBoundingClientRect();
@@ -80,12 +74,11 @@ const Sidebar = () => {
     };
 
     const fetchProjectDetails = async (id) => {
-        const res = await fetchData(`/getOneProject/${id}`)
-        const project = res.project
-        console.log(project)
+        const res = await fetchData(`/getOneProject/${id}`);
+        const project = res.project;
         dispatch(editProject(project));
         setSelectedProject(res.project);
-    }
+    };
 
     return (
         <div className={` text-white h-screen ${isCollapsed ? 'w-16 bg-primary' : 'w-52 bg-primary'} transition-all`}>

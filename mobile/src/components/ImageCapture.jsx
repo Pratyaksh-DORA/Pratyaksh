@@ -14,6 +14,7 @@ function ImageCapture({ route }) {
     const cameraRef = useRef(null);
     const navigation = useNavigation();
     const { state, dispatch } = useFormData();
+    const cloudinaryUrl = '';
 
     const { pointId } = route.params;
 
@@ -33,6 +34,7 @@ function ImageCapture({ route }) {
         if(cameraRef) {
             try {
                 const data = await cameraRef.current.takePictureAsync();
+                console.log(data.uri);
                 setImage(data.uri);
             } catch(err) {
                 console.log(err);
@@ -44,23 +46,55 @@ function ImageCapture({ route }) {
         if(image) {
             try {
                 await MediaLibrary.createAssetAsync(image);
-                const pointIndex = state.markedPoints.findIndex(point => point.pointId === pointId);
-                if (pointIndex !== -1) {
-                    const updatedMarkedPoints = [...state.markedPoints];
-                    updatedMarkedPoints[pointIndex] = {
-                        ...updatedMarkedPoints[pointIndex],
-                        imageData: image,
-                    };
-                    state.markedPoints = updatedMarkedPoints;
-                    console.log(updatedMarkedPoints);
-                }
+                uploadToCloudinary(image);
+                
                 alert('Image saved successfully!');
+                
                 setImage(null);
                 navigation.navigate('MarkedPoints');
             } catch(err) {
                 console.log(err);
             }
         }
+    };
+
+    const uploadToCloudinary = (image) => {
+        const cloudName = 'abxhdbxnxk';
+        const apiKey = '228476688589938';
+        const apiSecret = 'CFIhrctxzhmnZd-un-yP9fW-LSA';
+
+        const formData = new FormData();
+        formData.append('file', {
+            uri: image,
+            type: 'image/jpeg',
+            name: image.match(/\/([^/]+)\.jpg$/)[1]
+        });
+        formData.append('upload_preset', 'iplx0nld');
+        formData.append('cloud_name', cloudName);
+
+        fetch("https://api.cloudinary.com/v1_1/abxhdbxnxk/image/upload", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+        },
+        })
+        .then(res => res.json())
+        .then((data) => {
+            console.log(data.url);
+            const pointIndex = state.markedPoints.findIndex(point => point.pointId === pointId);
+                if (pointIndex !== -1) {
+                    const updatedMarkedPoints = [...state.markedPoints];
+                    updatedMarkedPoints[pointIndex] = {
+                        ...updatedMarkedPoints[pointIndex],
+                        imageData: data.url,
+                    };
+                    state.markedPoints = updatedMarkedPoints;
+                    console.log(image);
+                    console.log(updatedMarkedPoints);
+                }
+        })
+        .catch(error => console.error("Error uploading to Cloudinary:", error))
     };
 
     return(
