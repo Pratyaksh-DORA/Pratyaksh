@@ -27,7 +27,7 @@ function App() {
               <Route path="analysis" element={<Analysis />} />
               <Route path="GIS" element={<GIS />} />
               <Route path="simulator" element={<Analysis />} />
-              <Route path="chat" element={<Chat />} />  
+              <Route path="chat" element={<Chat />} />
               <Route path="report" element={<Report />} />
             </Route>
           </Routes>

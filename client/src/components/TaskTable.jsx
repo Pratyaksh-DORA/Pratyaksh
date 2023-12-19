@@ -84,7 +84,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                             <tr key={index}>
                                 <td className="border px-2 py-1">
                                     <input
-                                        className="w-full focus:outline-none"
+                                        className="w-full focus:outline-none bg-background bg-"
                                         type="text"
                                         value={task.name}
                                         onChange={(e) => handleEdit(index, "name", e.target.value)}
@@ -92,7 +92,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                                 </td>
                                 <td className="border px-2 py-1">
                                     <input
-                                        className="w-full focus:outline-none"
+                                        className="w-full focus:outline-none bg-background"
                                         type="text"
                                         value={task.description}
                                         onChange={(e) => handleEdit(index, "description", e.target.value)}
@@ -100,7 +100,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                                 </td>
                                 <td className="border px-2 py-1 ">
                                     <DatePicker
-                                        className="w-full focus:outline-none cursor-pointer"
+                                        className="w-full focus:outline-none bg-background cursor-pointer"
                                         selected={task.dueDate ? new Date(task.dueDate) : null}
                                         onChange={(date) => handleEdit(index, "dueDate", date)}
                                         dateFormat="dd-MM-yyyy"
@@ -108,7 +108,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                                 </td>
                                 <td className="border px-2 py-1">
                                     <input
-                                        className="w-full focus:outline-none"
+                                        className="w-full focus:outline-none bg-background"
                                         type="text"
                                         value={task.assigned}
                                         onChange={(e) => handleEdit(index, "assigned", e.target.value)}
@@ -116,7 +116,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                                 </td>
                                 <td className="border px-2 py-1">
                                     <select
-                                        className="w-full focus:outline-none appearance-none cursor-pointer"
+                                        className="w-full focus:outline-none bg-background appearance-none cursor-pointer"
                                         value={task.priority}
                                         onChange={(e) => handleEdit(index, "priority", e.target.value)}
                                     >
@@ -129,7 +129,7 @@ const TaskTable = ({ tasks, milestoneIndex, handleTaskEdit }) => {
                                 </td>
                                 <td className="border px-2 py-1">
                                     <select
-                                        className="w-full focus:outline-none appearance-none cursor-pointer"
+                                        className="w-full focus:outline-none bg-background appearance-none cursor-pointer"
                                         value={task.status}
                                         onChange={(e) => handleEdit(index, "status", e.target.value)}
                                     >
