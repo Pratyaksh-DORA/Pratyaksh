@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { MilestoneChart } from '../components';
 import { PieChart } from 'react-minimal-pie-chart';
@@ -205,4 +206,3 @@ const Home = () => {
     )
 }
 
-export default Home
