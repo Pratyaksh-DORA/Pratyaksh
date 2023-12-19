@@ -7,18 +7,18 @@ import { RiExternalLinkLine } from "react-icons/ri";
 
 const GIS = () => {
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState([null])
     const customIcon = new Icon({
         iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
         // iconUrl: require("./../placeholder.png"),
         iconSize: [38, 38] 
     });
 
-    const Map = () => {
-        const map = useMap()
-        map.setView([28.7041, 77.1025], 5);
-        return null
-    }
+    // const Map = () => {
+    //     const map = useMap()
+    //     map.setView([28.7041, 77.1025], 5);
+    //     return null
+    // }
 
     useEffect(() => {
         fetchData();
@@ -47,7 +47,8 @@ const GIS = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {data.map((project) => (
+                {data.projects &&
+                data.map((project) => (
                     <Marker key={project._id} position={project.location.coordinates} icon={customIcon}>
                         <Popup>
                             This is {project.name} <br /> 
