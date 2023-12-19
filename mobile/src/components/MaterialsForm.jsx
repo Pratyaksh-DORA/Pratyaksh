@@ -2,105 +2,60 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useFormData } from '../redux/FormDataContext';
-import { Dropdown } from 'react-native-element-dropdown';
 
-function Form() {
+function MaterialsForm() {
     const navigation = useNavigation();
     const { state, dispatch } = useFormData();
-    
-    const data = [
-        { label: 'Low', value: 'low' },
-        { label: 'Medium', value: 'medium' },
-        { label: 'High', value: 'high' },
-        { label: 'Critical', value: 'critical' },
-    ];
 
-    useEffect(() => {
-        state.problemsFormData = [],
-        state.markedPoints = [],
-        state.projectId = '',
-        state.userId = '',
-        state.updateDate = new Date();
-    }, []);
-
-    useFocusEffect(
-        React.useCallback(() => {
-            state.problemsFormData = [],
-            state.markedPoints = [],
-            state.projectId = '',
-            state.userId = '',
-            state.updateDate = new Date();
-        }, [])
-      );
-
-    const [formData, setFormData] = useState([
-        { problem: '', reason: '', effect: '', severity: 'low' },
+    const [materialsFormData, setMaterialsFormData] = useState([
+        { material: '', quantityUsed: '' },
     ]);
 
     const handleInputChange = (index, field, value) => {
-        const updatedFormData = [...formData];
+        const updatedFormData = [...materialsFormData];
         updatedFormData[index][field] = value;
         console.log(updatedFormData);
-        setFormData(updatedFormData);
+        setMaterialsFormData(updatedFormData);
     };
 
     const addForm = () => {
-        setFormData([...formData, { problem: '', reason: '', effect: '', severity: 'low' }]);
+        setMaterialsFormData([...materialsFormData, { material: '', quantityUsed: '' }]);
     };
 
     const removeForm = (index) => {
-        const updatedFormData = [...formData];
+        const updatedFormData = [...materialsFormData];
         updatedFormData.splice(index, 1);
-        setFormData(updatedFormData);
+        setMaterialsFormData(updatedFormData);
     };
 
     const nextPage = () => {
-        state.problemsFormData = formData;
-        console.log(state.problemsFormData);
-        navigation.navigate('TagImage');
+        state.materialsFormData = materialsFormData;
+        console.log(state.materialsFormData);
+        navigation.navigate('Form');
     };
 
-    return (
+    return(
         <SafeAreaView style={styles.container}>
             <Text style={{ fontSize: 30, paddingTop: 20 }}>
-                Delays Update
+                Materials Updates
             </Text>
             <ScrollView style={styles.formContainer}>
-                {formData.map((form, index) => (
+                {materialsFormData.map((form, index) => (
                     <View key={index}>
-                        <Text style={styles.label}>Delay {index + 1}</Text>
+                        <Text style={styles.label}>Material {index + 1}</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder='Problem'
-                            value={form.problem || ''}
-                            onChangeText={(text) => handleInputChange(index, 'problem', text)}
+                            placeholder='Material'
+                            value={form.material || ''}
+                            onChangeText={(text) => handleInputChange(index, 'material', text)}
                         />
 
                         <TextInput
                             style={styles.input}
-                            placeholder='Reason for the Problem'
-                            value={form.reason || ''}
-                            onChangeText={(text) => handleInputChange(index, 'reason', text)}
+                            placeholder='Quantity Consumed'
+                            value={form.quantityUsed || ''}
+                            onChangeText={(text) => handleInputChange(index, 'quantityUsed', text)}
                         />
-
-                        <TextInput
-                            style={{ ...styles.input, marginBottom: 10 }}
-                            placeholder='Effect of that Problem'
-                            value={form.effect || ''}
-                            onChangeText={(text) => handleInputChange(index, 'effect', text)}
-                        />
-
-                        <View style={styles.dropdownContainer}>
-                            <Dropdown
-                                data={data}
-                                maxHeight={200}
-                                labelField="label"
-                                valueField="value"
-                                placeholder="Select item"
-                                value={form.severity || ''}
-                                onChange={(item) => handleInputChange(index, 'severity', item.value)}
-                            />
-                        </View>
 
                         <TouchableOpacity style={styles.removeButton} onPress={() => removeForm(index)} >
                             <Text style={styles.removeButtonText}>Remove-</Text>
@@ -192,4 +147,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Form;
+export default MaterialsForm;
