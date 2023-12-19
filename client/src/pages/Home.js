@@ -95,12 +95,12 @@ const Home = () => {
 
     ]
     const data = [
-        { title: 'completed', value: 10, color: '#8e44ad' },    // Purple
-        { title: 'not started', value: 20, color: '#808080' },   // Grey
-        { title: 'planning', value: 5, color: '#3498db' },       // Blue
-        { title: 'progress', value: 15, color: '#27ae60' },       // Green
-        { title: 'cancelled', value: 25, color: '#e74c3c' },      // Red
-        { title: 'paused', value: 25, color: '#e67e22' },         // Orange
+        { title: 'completed', value: 10, color: '#864cf6' },    // Purple
+        { title: 'not started', value: 20, color: '#d1d5db' },   // Grey
+        { title: 'planning', value: 5, color: '#6CBEED' },       // Blue
+        { title: 'progress', value: 15, color: '#9EE493' },       // Green
+        { title: 'cancelled', value: 25, color: '#FF686B' },      // Red
+        { title: 'paused', value: 25, color: '#F9A620' },         // Orange
     ];
 
 
@@ -134,7 +134,7 @@ const Home = () => {
 
                     />
 
-                    <div id="description">
+                    <div id="description" className='w-40'>
                         <ul>
                             {data.map((item, index) => (
                                 <li key={index}>
@@ -176,7 +176,7 @@ const Home = () => {
 
 
                 </div>
-                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-gradient-to-tr from-blue-500 to-blue-400 w-72 text-white'>
+                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-violet-500 w-72 text-white'>
 
                     <p className='text-3xl font-bold'>
                         4,500
@@ -184,14 +184,14 @@ const Home = () => {
                     <p className='text-sm flex items-center'> Budget Allocated</p>
                 </div>
 
-                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-gradient-to-tr from-yellow-500 to-yellow-400 w-72 text-white'>
+                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-highlight w-72 text-white'>
 
                     <p className='text-3xl font-bold'>
                         4,500
                     </p>
                     <p className='text-sm flex items-center'> Budget spent</p>
                 </div>
-                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-gradient-to-tr from-green-500 to-green-400 w-72 text-white'>
+                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-posFeedback w-72 text-white'>
 
                     <p className='text-3xl font-bold'>
                         4,500

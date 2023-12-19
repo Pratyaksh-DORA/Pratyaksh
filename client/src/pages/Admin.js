@@ -5,7 +5,7 @@ const Admin = () => {
     return (
         <div className='flex items-center justify-evenly p-4'>
             <div>
-                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-gradient-to-tr from-blue-500 to-blue-400 w-72 text-white'>
+                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-neutral w-72 text-white'>
                     <p className='text-3xl'><MdIncompleteCircle /></p>
                     <p className='text-sm'>Completed Projects</p>
                     <p className='text-3xl font-bold'>
@@ -15,7 +15,7 @@ const Admin = () => {
                 </div>
             </div>
             <div>
-                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-gradient-to-tr from-green-500 to-green-400 w-72 text-white'>
+                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-posFeedback w-72 text-white'>
                     <p className='text-3xl'><TbProgressBolt /></p>
                     <p className='text-sm'>Ongoing Projects</p>
                     <p className='text-3xl font-bold'>
@@ -25,7 +25,7 @@ const Admin = () => {
                 </div>
             </div>
             <div>
-                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-gradient-to-tr from-red-500 to-red-400 w-72 text-white'>
+                <div className='flex flex-col gap-2 p-4 rounded-md shadow-md bg-negFeedback w-72 text-white'>
                     <p className='text-3xl'><MdOutlineMotionPhotosPaused /></p>
                     <p className='text-sm'>Paused Projects</p>
                     <p className='text-3xl font-bold'>
