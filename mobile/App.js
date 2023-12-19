@@ -6,6 +6,7 @@ import Form from './src/components/Form';
 import TagImage from './src/components/TagImage';
 import MarkedPoints from './src/components/MarkedPoints';
 import ImageCapture from './src/components/ImageCapture';
+import MaterialsForm from './src/components/MaterialsForm';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
           <Stack.Screen name="TagImage" component={TagImage} />
           <Stack.Screen name="MarkedPoints" component={MarkedPoints} />
           <Stack.Screen name="ImageCapture" component={ImageCapture} />
+          <Stack.Screen name="MaterialsForm" component={MaterialsForm} />
         </Stack.Navigator>
       </FormDataProvider>
     </NavigationContainer>

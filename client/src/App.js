@@ -6,6 +6,7 @@ import { Landing, Signup, Login, Main, AddProject, Analysis, Chat, Task, Team, U
 
 import { Provider } from "react-redux";
 import { store } from "./store/store"
+import ImageTagging from "./components/ImageTagging";
 
 function App() {
 
@@ -27,8 +28,9 @@ function App() {
               <Route path="analysis" element={<Analysis />} />
               <Route path="GIS" element={<GIS />} />
               <Route path="simulator" element={<Analysis />} />
-              <Route path="chat" element={<Chat />} />  
+              <Route path="chat" element={<Chat />} />
               <Route path="report" element={<Report />} />
+              <Route path="imageTagging" element={<ImageTagging />} />
             </Route>
           </Routes>
         </Router>

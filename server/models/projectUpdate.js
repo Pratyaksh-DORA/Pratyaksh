@@ -1,65 +1,120 @@
 const mongoose = require("mongoose");
 
+const markedPointSchema = new mongoose.Schema({
+    image: { 
+        type: String, 
+    },
+    imageData: { 
+        type: String, 
+    },
+    pointId: { 
+        type: String, 
+    },
+    x: { 
+        type: Number,  
+    },
+    y: { 
+        type: Number, 
+    },
+});
+
+const problemsFormDataSchema = new mongoose.Schema({
+    effect: { 
+        type: String, 
+    },
+    problem: { 
+        type: String, 
+    },
+    reason: { 
+        type: String, 
+    },
+    severity: { 
+        type: String, 
+    },
+});
+
+const materialsFormDataSchema = new mongoose.Schema({
+    material: { 
+        type: String, 
+    },
+    quantityUsed: { 
+        type: String, 
+    },
+});
+
+const weatherInformationSchema = new mongoose.Schema({
+    aqi: { 
+        type: Number, 
+        required: true 
+    },
+    feels_like: { 
+        type: Number, 
+        required: true 
+    },
+    grnd_level: { 
+        type: Number, 
+        required: true 
+    },
+    humidity: { 
+        type: Number, 
+        required: true 
+    },
+    pressure: { 
+        type: Number, 
+        required: true 
+    },
+    sea_level: { 
+        type: Number, 
+        required: true 
+    },
+    temp: { 
+        type: Number, 
+        required: true 
+    },
+    temp_kf: { 
+        type: Number, 
+        required: true 
+    },
+    temp_max: { 
+        type: Number, 
+        required: true 
+    },
+    temp_min: { 
+        type: Number, 
+        required: true 
+    },
+});
+
 const projectUpdateSchema = new mongoose.Schema({
     projectId: {
-        type: mongoose.Schema.ObjectId,
-        ref: "Project",
+        type: String,
         required: true
     },
     userId: {
-        type: mongoose.Schema.ObjectId,
-        ref: "User",
+        type: String,
         required: true
     },
     updateDate: {
         type: Date,
-        // required: true,
+        required: true,
         default: Date.now()
     },
-    progressPercentage: {
-        type: Number,
-        // required: true,
-        default: 0
+    markedPoints: { 
+        type: [markedPointSchema], 
+        required: true 
     },
-    externalFactors: [
-        {
-            name: {
-                type: String,
-                // required: true
-            },
-            description: {
-                type: String,
-                // required: true
-            },
-            impact: {
-                type: String,
-                enum: ['delay', 'acceleartion', 'noImpact'],
-                default: 'noImpact'
-            },
-            severity: {
-                type: String,
-                enum: ['low', 'medium', 'high', 'critical'],
-                default: 'low'
-            }
-        }
-    ],
-    siteImages: [
-        {
-            sitePlan: String,
-            id: {
-                type: String,
-                // required: true,
-            },
-            secure_url: {
-                type: String,
-                // required: true,
-            },
-            coordinates: {
-                type: [Number],
-            }
-        },
-    ],
-
+    problemsFormData: { 
+        type: [problemsFormDataSchema], 
+        required: true 
+    },
+    materialsFormData: {
+        type: [materialsFormDataSchema], 
+        required: true 
+    },
+    weatherInformation: {
+        type: [weatherInformationSchema],
+        required: true
+    }
 });
 
 module.exports = mongoose.model("ProjectUpdate", projectUpdateSchema)

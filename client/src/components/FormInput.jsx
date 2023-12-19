@@ -15,7 +15,7 @@ const FormInput = (props) => {
         <div className={`flex flex-col ${className || 'w-96'}`}>
             <label className="mt-2 text-sm text-gray-400">{label}</label>
             <input
-                className={`p-2 rounded-md border bg-background ${isValid || !touched ? "border-gray-300" : "border-red-400"
+                className={`p-2 rounded-md border bg-background  ${isValid || !touched ? "border-gray-300" : "border-red-400"
                     }`}
                 {...inputProps}
                 value={value}
