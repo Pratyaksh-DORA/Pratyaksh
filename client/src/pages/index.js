@@ -10,5 +10,7 @@ export { default as Chat } from "./Chat"
 export { default as Update } from "../pages/Update"
 export { default as Analysis } from "../pages/Analysis"
 export { default as Team } from "../pages/Team"
+export { default as Admin } from "./Admin.js"
 export { default as Report } from "../pages/Report"
 export { default as GIS } from "../pages/GIS"
+

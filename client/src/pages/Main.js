@@ -4,7 +4,7 @@ import { Sidebar, Header } from '../components';
 
 const Main = () => {
     return (
-        <div className='bg-white flex'>
+        <div className='bg-background max-w-full flex'>
 
             <Sidebar />
             <div className="w-full  rounded-lg  page-content flex-grow">

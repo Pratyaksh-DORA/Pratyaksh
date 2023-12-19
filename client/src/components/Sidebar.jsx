@@ -9,7 +9,7 @@ import Modal from './Modal';
 import { fetchData, putData } from '../utilis/Api';
 import { Link } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa6";
-import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox, MdOutlineDashboard } from "react-icons/md";
+import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox, MdOutlineDashboard, MdDashboard } from "react-icons/md";
 import { PiGraphDuotone } from "react-icons/pi";
 
 
@@ -77,7 +77,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className={` text-white h-screen ${isCollapsed ? 'w-16 bg-white' : 'w-52 bg-primary'} transition-all`}>
+        <div className={` text-white h-screen ${isCollapsed ? 'w-16 bg-primary' : 'w-52 bg-primary'} transition-all`}>
             <div className="p-4 flex justify-between items-center">
 
                 {!isCollapsed &&
@@ -85,7 +85,7 @@ const Sidebar = () => {
                         <button
                             ref={buttonRef}
                             onClick={openModal}
-                            className=" text-gray-800 font-semibold  "
+                            className=" font-semibold  "
                         >
                             {selectedProject ? selectedProject.name : "Loading..."}
                         </button>
@@ -101,12 +101,15 @@ const Sidebar = () => {
                     </div>
                 }
                 {isCollapsed && selectedProject ? (
-                    <FaBars className="text-2xl cursor-pointer" onClick={toggleSidebar} />
+                    <FaBars className="text-2xl cursor-pointer " onClick={toggleSidebar} />
                 ) : (
+
                     <MdKeyboardDoubleArrowLeft className="text-2xl cursor-pointer" onClick={toggleSidebar} />
+
+
                 )}
             </div>
-            {!isCollapsed && (
+            {!isCollapsed ? (
                 <div className="p-4 text-md font-semibold gap-5 flex flex-col">
 
                     <Link to={`/${id}`} className='flex gap-2 items-center '><MdOutlineDashboard /> Dashboard</Link>
@@ -121,7 +124,21 @@ const Sidebar = () => {
 
 
                 </div>
-            )}
+            ) : <>
+                <div className="p-4 text-md font-semibold gap-8 flex flex-col ">
+
+                    <Link to={`/${id}`} className='flex text-lg gap-2 items-center hover:bg-white'><MdOutlineDashboard /> </Link>
+                    <Link to={`/${id}/task`} className='flex text-lg gap-2 items-center '><MdOutlineCheckBox /> </Link>
+                    <Link to={`/${id}/team`} className='flex text-lg gap-2 items-center '> <FaRegUser /></Link>
+                    <Link to={`/${id}/update`} className='flex text-lg gap-2 items-center '><MdUpdate /> </Link>
+                    <Link to={`/${id}/analysis`} className='flex text-lg gap-2 items-center '><MdBarChart /> </Link>
+
+                    <Link to={`/${id}/simulator`} className='flex text-lg gap-2 items-center '><PiGraphDuotone /> </Link>
+                    <Link to={`/${id}/chat`} className='flex text-lg gap-2 items-center '><MdChatBubbleOutline /> </Link>
+
+
+                </div>
+            </>}
         </div>
     );
 };
