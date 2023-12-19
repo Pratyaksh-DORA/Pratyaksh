@@ -86,7 +86,7 @@ exports.updateProject = async (req, res, next) => {
     if (!project) {
         return next(new CustomError(stringConstants.noProject, 404));
     }
-    const { name, description, location, startDate, endDate, status, milestones, category } = req.body;
+    const { name, description, location, startDate, endDate, status, milestones, category, sector } = req.body;
 
 
     if (name) project.name = name;
@@ -119,5 +119,11 @@ exports.getAllProjects = async (req, res, next) => {
     res.status(200).json({
         sucess: true,
         projects
+    })
+}
+
+exports.test = async (req, res, next) => {
+    res.status(200).json({
+        message: "sucess"
     })
 }
