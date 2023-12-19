@@ -52,7 +52,7 @@ const GIS = () => {
                         <Popup>
                             This is {project.name} <br /> 
                             Status: {project.status} <br /> 
-                            <a href={`http://localhost:3000/${project._id}`} target="_blank"> 
+                            <a href={`http://localhost:3000/${project._id}`} target="_self"> 
                             Know more  </a> 
                         </Popup>
                     </Marker>

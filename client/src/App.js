@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
-import { Landing, Signup, Login, Main, AddProject, Analysis, Chat, Task, Team, Update, Home, Admin, GIS } from "./pages";
+import { Landing, Signup, Login, Main, AddProject, Analysis, Chat, Task, Team, Update, Home, Admin, GIS, Report } from "./pages";
 
 
 
