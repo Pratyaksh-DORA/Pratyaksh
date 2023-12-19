@@ -6,14 +6,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#706bf9',
+        primary: '#864cf6',
         background: '#f8f9fd',
         secondary: '#FF5722',
         searchGray: '#E5EAEF',
         iconsLight: '#666666',
         iconDark: '#333333',
-        NegFeedback: '#FF1744',
-        PosFeedback: '#4CAF50'
+        negFeedback: '#FF686B',
+        neutral: '#ffcc5f',
+        highlight: '#F9A620',
+        posFeedback: '#9EE493'
       },
     },
   },
