@@ -55,7 +55,7 @@ const Task = () => {
                     <div key={index} className='mt-8'>
                         <h2>
                             <input
-                                className="mb-2 w-full focus:outline-none text-lg font-semibold"
+                                className="mb-2 w-full focus:outline-none bg-background text-lg font-semibold"
                                 type="text"
                                 value={milestone.name}
                                 onChange={(e) => handleMilestoneEdit(index, 'name', e.target.value)}
@@ -65,10 +65,10 @@ const Task = () => {
                     </div>
                 ))}
             </div>
-            <button onClick={handleAddMilestone} className="mt-4 p-2 border rounded-md">
+            <button onClick={handleAddMilestone} className="bg-primary text-white mt-4 p-2 border rounded-md">
                 Add Milestone
             </button>
-            <button onClick={handleSave} className="mt-4 p-2 border rounded-md">
+            <button onClick={handleSave} className="bg-posFeedback mt-4 p-2 border rounded-md">
                 Save
             </button>
         </div>
