@@ -13,5 +13,4 @@ export { default as Team } from "../pages/Team"
 export { default as Admin } from "./Admin.js"
 export { default as Report } from "./Report"
 export { default as GIS } from "../pages/GIS"
-
-
+export { default as Setting } from "./Setting.js"

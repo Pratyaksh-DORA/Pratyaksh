@@ -31,7 +31,7 @@ const MilestoneChart = ({ milestones }) => {
 
                         <div>
                             <div className="text-xs text-gray-600 text-center">
-                                {milestone.target_date}
+                                {milestone.target_date.slice(0, -14)}
                             </div>
 
                             <div className="text-sm text-black text-center font-semibold mt-1">
