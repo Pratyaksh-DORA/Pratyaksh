@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'; // Import ScrollView
 import { useNavigation, CommonActions } from '@react-navigation/native';
 import { useFormData } from '../redux/FormDataContext';
+import { Cloudinary } from "@cloudinary/url-gen";
 
 const MarkedPoints = () => {
     const navigation = useNavigation();

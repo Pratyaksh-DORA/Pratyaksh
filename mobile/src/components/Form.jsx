@@ -2,24 +2,33 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, ScrollView, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useFormData } from '../redux/FormDataContext';
+import { Dropdown } from 'react-native-element-dropdown';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 function Form() {
     const navigation = useNavigation();
     const { state, dispatch } = useFormData();
-    // const { formData, markedPoints } = state;
+    
+    const data = [
+        { label: 'Low', value: 'low' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'High', value: 'high' },
+        { label: 'Critical', value: 'critical' },
+    ];
 
     const [formData, setFormData] = useState([
-        { problem: '', reason: '', effect: '' },
+        { problem: '', reason: '', effect: '', severity: 'low' },
     ]);
 
     const handleInputChange = (index, field, value) => {
         const updatedFormData = [...formData];
         updatedFormData[index][field] = value;
+        console.log(updatedFormData);
         setFormData(updatedFormData);
     };
 
     const addForm = () => {
-        setFormData([...formData, { problem: '', reason: '', effect: '' }]);
+        setFormData([...formData, { problem: '', reason: '', effect: '', severity: 'low' }]);
     };
 
     const removeForm = (index) => {
@@ -30,6 +39,7 @@ function Form() {
 
     const nextPage = () => {
         state.problemsFormData = formData;
+        console.log(state.problemsFormData);
         navigation.navigate('TagImage');
     };
 
@@ -62,6 +72,18 @@ function Form() {
                             value={form.effect || ''}
                             onChangeText={(text) => handleInputChange(index, 'effect', text)}
                         />
+
+                        <View style={styles.dropdownContainer}>
+                            <Dropdown
+                                data={data}
+                                maxHeight={200}
+                                labelField="label"
+                                valueField="value"
+                                placeholder="Select item"
+                                value={form.severity || ''}
+                                onChange={(item) => handleInputChange(index, 'severity', item.value)}
+                            />
+                        </View>
 
                         <TouchableOpacity style={styles.removeButton} onPress={() => removeForm(index)} >
                             <Text style={styles.removeButtonText}>Remove-</Text>
@@ -135,6 +157,20 @@ const styles = StyleSheet.create({
     nextButtonText: {
         color: 'white',
         fontSize: 16,
+    },
+    dropdown: {
+        margin: 16,
+        height: 50,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.5,
+    },
+    dropdownContainer: {
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 5,
+        paddingVertical: 4,
+        paddingHorizontal: 8,
+        marginBottom: 15,
     },
 });
 
