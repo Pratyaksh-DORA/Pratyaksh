@@ -18,7 +18,9 @@ import {
 } from "./pages";
 
 import { Provider } from "react-redux";
-import { store } from "./store/store";
+
+import { store } from "./store/store"
+import ImageTagging from "./components/ImageTagging";
 
 function App() {
   return (
@@ -44,6 +46,7 @@ function App() {
               <Route path="simulator" element={<Analysis />} />
               <Route path="chat" element={<Chat />} />
               <Route path="report" element={<Report />} />
+              <Route path="imageTagging" element={<ImageTagging />} />
             </Route>
           </Routes>
         </Router>

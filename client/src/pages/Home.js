@@ -215,3 +215,5 @@ const Home = ({ latitude, longitude }) => {
 };
 
 export default Home;
+
+      
