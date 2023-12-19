@@ -203,6 +203,7 @@ const Home = () => {
                 <MilestoneChart milestones={milestones} />
             </div>
         </div>
-    )
+    );
 }
 
+export default Home
