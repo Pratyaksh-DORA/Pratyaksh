@@ -5,13 +5,14 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 import { login } from "../features/AuthSlice"
 import { editProject } from "../features/ProjectSlice"
-import Modal from './Modal';
+import ModalI from './Modal';
 import { fetchData, putData } from '../utilis/Api';
 import { Link } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa6";
-import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox, MdOutlineDashboard, MdDashboard } from "react-icons/md";
+import { MdBarChart, MdChatBubbleOutline, MdUpdate, MdOutlineCheckBox, MdOutlineDashboard, MdDashboard, MdOutlineSettings } from "react-icons/md";
 import { PiGraphDuotone } from "react-icons/pi";
-
+import ProjectDetails from './ProjectDetails';
+import Modal from 'react-modal';
 
 
 
@@ -67,6 +68,16 @@ const Sidebar = () => {
         fetchProjectDetails(id);
         closeModal()
     };
+    const [modalIsOpenSetting, setModalIsOpenSetting] = useState(false);
+
+    const openModalSetting = () => {
+        setModalIsOpenSetting(true);
+    };
+
+    const closeModalSetting = () => {
+        console.log("drunken")
+        setModalIsOpenSetting(false);
+    };
 
     const fetchProjectDetails = async (id) => {
         const res = await fetchData(`/getOneProject/${id}`)
@@ -90,7 +101,7 @@ const Sidebar = () => {
                             {selectedProject ? selectedProject.name : "Loading..."}
                         </button>
                         {isModalOpen && (
-                            <Modal
+                            <ModalI
                                 projects={projects}
                                 closeModal={closeModal}
                                 position={modalPosition}
@@ -121,6 +132,17 @@ const Sidebar = () => {
                     <Link to={`/${id}/simulator`} className='flex gap-2 items-center '><PiGraphDuotone /> Simulator</Link>
                     <Link to={`/${id}/chat`} className='flex gap-2 items-center '><MdChatBubbleOutline /> Chats</Link>
                     <Link to={`/${id}/report`} className='flex gap-2 items-center '><MdChatBubbleOutline /> Reports </Link>
+                    <div>
+                        <button onClick={openModalSetting} className='flex gap-2 items-center'><MdOutlineSettings /> Setting</button>
+                        <Modal
+                            isOpen={modalIsOpenSetting}
+                            onRequestClose={closeModalSetting}
+                            contentLabel="Hello World Modal"
+                        >
+                            <ProjectDetails closeModalSetting={closeModalSetting} />
+                        </Modal>
+                    </div>
+
 
 
                 </div>
@@ -135,6 +157,16 @@ const Sidebar = () => {
 
                     <Link to={`/${id}/simulator`} className='flex text-lg gap-2 items-center '><PiGraphDuotone /> </Link>
                     <Link to={`/${id}/chat`} className='flex text-lg gap-2 items-center '><MdChatBubbleOutline /> </Link>
+                    <div>
+                        <button onClick={openModalSetting} className='text-lg'><MdOutlineSettings /></button>
+                        <Modal
+                            isOpen={modalIsOpenSetting}
+                            onRequestClose={closeModalSetting}
+                            contentLabel="Hello World Modal"
+                        >
+                            <ProjectDetails closeModalSetting={closeModalSetting} />
+                        </Modal>
+                    </div>
 
 
                 </div>

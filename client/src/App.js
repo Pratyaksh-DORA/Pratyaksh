@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
-import { Landing, Signup, Login, Main, AddProject, Analysis, Chat, Task, Team, Update, Home, Admin, GIS, Report } from "./pages";
+import { Landing, Signup, Login, Main, AddProject, Analysis, Chat, Task, Team, Update, Home, Admin, GIS, Report, Setting } from "./pages";
 
-
+import Milestone from "./pages/Milestone";
 
 import { Provider } from "react-redux";
 import { store } from "./store/store"
@@ -18,6 +18,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/onboarding" element={<AddProject />} />
+            <Route path="/milestone" element={<Milestone />} />
             <Route path="/:id" element={<Main />} >
               <Route path="" element={<Home />} />
               <Route path="task" element={<Task />} />
@@ -29,7 +30,9 @@ function App() {
               <Route path="simulator" element={<Analysis />} />
               <Route path="chat" element={<Chat />} />
               <Route path="report" element={<Report />} />
+              <Route path="setting" element={<Setting />} />
             </Route>
+
           </Routes>
         </Router>
       </div>

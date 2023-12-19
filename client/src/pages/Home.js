@@ -2,98 +2,101 @@
 import React from 'react'
 import { MilestoneChart } from '../components';
 import { PieChart } from 'react-minimal-pie-chart';
-
+const project = JSON.parse(localStorage.getItem("project"))
+console.log("first")
+console.log(project)
 
 const Home = () => {
     const project = JSON.parse(localStorage.getItem("project"))
-    const milestones = [
-        {
-            name: "Milestone 1",
-            target_date: "2023-03-01",
-            status: "In Progress",
-            tasks: [
-                {
-                    name: "Task 1",
-                    description: "Description for Task 1",
-                    dueDate: "2023-03-15",
-                    assigned: "657ffc42f346718deebe59d5",
-                    priority: "High",
-                    status: "Not Started"
-                },
-                {
-                    name: "Task 2",
-                    description: "Description for Task 2",
-                    dueDate: "2023-03-20",
-                    assigned: "657ffc42f346718deebe59d5",
-                    priority: "Medium",
-                    status: "Not Started"
-                }
-            ]
-        },
-        {
-            name: "Milestone 2",
-            target_date: "2023-05-01",
-            status: "Not Started",
-            tasks: [
-                {
-                    name: "Task 3",
-                    description: "Description for Task 3",
-                    dueDate: "2023-05-10",
-                    assigned: "657ffc42f346718deebe59d5",
-                    priority: "Low",
-                    status: "Not Started"
-                }
-            ]
-        },
-        {
-            name: "Milestone 3",
-            target_date: "2023-05-01",
-            status: "completed",
-            tasks: [
-                {
-                    name: "Task 3",
-                    description: "Description for Task 3",
-                    dueDate: "2023-05-10",
-                    assigned: "657ffc42f346718deebe59d5",
-                    priority: "Low",
-                    status: "Not Started"
-                }
-            ]
-        }
-        ,
-        {
-            name: "Milestone 3",
-            target_date: "2023-05-01",
-            status: "completed",
-            tasks: [
-                {
-                    name: "Task 3",
-                    description: "Description for Task 3",
-                    dueDate: "2023-05-10",
-                    assigned: "657ffc42f346718deebe59d5",
-                    priority: "Low",
-                    status: "Not Started"
-                }
-            ]
-        }
-        ,
-        {
-            name: "Milestone 3",
-            target_date: "2023-05-01",
-            status: "completed",
-            tasks: [
-                {
-                    name: "Task 3",
-                    description: "Description for Task 3",
-                    dueDate: "2023-05-10",
-                    assigned: "657ffc42f346718deebe59d5",
-                    priority: "Low",
-                    status: "Not Started"
-                }
-            ]
-        }
+    // const milestones = [
+    //     {
+    //         name: "Milestone 1",
+    //         target_date: "2023-03-01",
+    //         status: "In Progress",
+    //         tasks: [
+    //             {
+    //                 name: "Task 1",
+    //                 description: "Description for Task 1",
+    //                 dueDate: "2023-03-15",
+    //                 assigned: "657ffc42f346718deebe59d5",
+    //                 priority: "High",
+    //                 status: "Not Started"
+    //             },
+    //             {
+    //                 name: "Task 2",
+    //                 description: "Description for Task 2",
+    //                 dueDate: "2023-03-20",
+    //                 assigned: "657ffc42f346718deebe59d5",
+    //                 priority: "Medium",
+    //                 status: "Not Started"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         name: "Milestone 2",
+    //         target_date: "2023-05-01",
+    //         status: "Not Started",
+    //         tasks: [
+    //             {
+    //                 name: "Task 3",
+    //                 description: "Description for Task 3",
+    //                 dueDate: "2023-05-10",
+    //                 assigned: "657ffc42f346718deebe59d5",
+    //                 priority: "Low",
+    //                 status: "Not Started"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         name: "Milestone 3",
+    //         target_date: "2023-05-01",
+    //         status: "completed",
+    //         tasks: [
+    //             {
+    //                 name: "Task 3",
+    //                 description: "Description for Task 3",
+    //                 dueDate: "2023-05-10",
+    //                 assigned: "657ffc42f346718deebe59d5",
+    //                 priority: "Low",
+    //                 status: "Not Started"
+    //             }
+    //         ]
+    //     }
+    //     ,
+    //     {
+    //         name: "Milestone 3",
+    //         target_date: "2023-05-01",
+    //         status: "completed",
+    //         tasks: [
+    //             {
+    //                 name: "Task 3",
+    //                 description: "Description for Task 3",
+    //                 dueDate: "2023-05-10",
+    //                 assigned: "657ffc42f346718deebe59d5",
+    //                 priority: "Low",
+    //                 status: "Not Started"
+    //             }
+    //         ]
+    //     }
+    //     ,
+    //     {
+    //         name: "Milestone 3",
+    //         target_date: "2023-05-01",
+    //         status: "completed",
+    //         tasks: [
+    //             {
+    //                 name: "Task 3",
+    //                 description: "Description for Task 3",
+    //                 dueDate: "2023-05-10",
+    //                 assigned: "657ffc42f346718deebe59d5",
+    //                 priority: "Low",
+    //                 status: "Not Started"
+    //             }
+    //         ]
+    //     }
 
-    ]
+    // ]
+    const milestones = project.milestones
     const data = [
         { title: 'completed', value: 10, color: '#8e44ad' },    // Purple
         { title: 'not started', value: 20, color: '#808080' },   // Grey
@@ -110,15 +113,15 @@ const Home = () => {
 
             <div className='flex items-center ml-2 px-4 gap-12'>
 
-                <div className='bg-white rounded-md  shadow-md p-4 w-fit flex gap-8'>
+                <div className='bg-white rounded-md  shadow-md p-4 w-2/5 flex gap-8 '>
                     <img className='rounded-md w-40 ' src="https://images.unsplash.com/photo-1591955506264-3f5a6834570a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="img" />
                     <div className='text-sm flex flex-col gap-2'>
-                        <p><span className='font-semibold'>Project :</span> Dora The Explorer</p>
-                        <p><span className='font-semibold'>Description :</span> Project for Real time monitoring of infrastructure.</p>
-                        <p><span className='font-semibold'>Contractor :</span> Sunil Jangid</p>
-                        <p><span className='font-semibold'>Progress :</span> 48% completed</p>
-                        <p><span className='font-semibold'>Start date:</span> 12/25/23</p>
-                        <p><span className='font-semibold'>Actual End date:</span> 18/25/23</p>
+                        <p><span className='font-semibold'>Project :</span> {project.name}</p>
+                        <p><span className='font-semibold'>Description :</span> {project.description}</p>
+                        <p><span className='font-semibold'>Contractor :</span> {project.contractir}</p>
+                        <p><span className='font-semibold'>Progress :</span> {project.progress}% completed</p>
+                        <p><span className='font-semibold'>Start date:</span> {project.startDate.slice(0, -14)}</p>
+                        <p><span className='font-semibold'>Actual End date:</span> {project.endDate.slice(0, -14)}</p>
                         <p><span className='font-semibold'>Delay by :</span>14 days</p>
                     </div>
                 </div>
