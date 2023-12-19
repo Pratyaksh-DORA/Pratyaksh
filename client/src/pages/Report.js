@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
-import hex from "../assets/anlytics.jpg";
 
 const date = new Date();
 const today = date.toLocaleDateString("en-GB", {
@@ -19,7 +18,7 @@ const Report = () => {
       sector: "construction",
       projectManager: "Ishika Jain",
       contractor: "Dinesh A",
-      date: "12/10/2003",
+      date: today,
       reportingTimeStart: "6:00pm",
       reportingTimeEnd: "8:00pm",
       Weather: "Sunny",
@@ -66,10 +65,25 @@ const Report = () => {
         { name: "gagan", type: "engineer", hours: "30" },
       ],
       equipment: [
-        { name: "bull dozer", type: "being used", hours: "70" },
-        { name: "mixer", type: "not being used", hours: "20" },
-        { name: "driller", type: "being used", hours: "50" },
-        { name: "newmixer", type: "used", hours: "30" },
+        {
+          name: "bull dozer",
+          type: "being used",
+          status: "being used",
+          hours: "70",
+        },
+        {
+          name: "mixer",
+          type: "not being used",
+          status: "being used",
+          hours: "20",
+        },
+        {
+          name: "driller",
+          type: "done",
+          status: "being used",
+          hours: "50",
+        },
+        { name: "newmixer", type: "used", status: "being used", hours: "30" },
       ],
       materials: [
         {
@@ -96,6 +110,7 @@ const Report = () => {
           comments: "gave this this feedback",
         },
       ],
+      images: ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/ba/29/5c/img-worlds-of-adventure.jpg?w=1200&h=1200&s=1", "https://www.timeoutdubai.com/cloud/timeoutdubai/2021/09/11/hfpqyV7B-IMG-Dubai-UAE.jpg"]
     },
   ]);
   const [projectManagerName, setProjectManagerName] = useState(
@@ -293,7 +308,7 @@ const Report = () => {
   }, [items]);
 
   return (
-    <div className="md:flex">
+    <div className="md:flex ml-12">
       {/* <form
         className="flex flex-col bg-white shadow-md px-4 md:flex-row py-2 w-1/2"
         id="print"
@@ -360,22 +375,27 @@ const Report = () => {
           </div>
           <div className="flex justify-around flex-wrap gap-2 ">
             <img
-              className="w-1/6 py-4 max-w-full max-h-full"
+              className="w-1/6 my-4
+
+ bg-gray-100
+ max-w-full max-h-full"
               src={hex}
               alt="hi gir;"
             />
             <img
-              className="w-1/6 py-4 max-w-full max-h-full"
+              className="w-1/6 my-4
+
+ bg-gray-100
+ max-w-full max-h-full"
               src={hex}
               alt="hi gir;"
             />
           </div>
         </div>
       </form> */}
-      <div className="w-1/2 bg-white shadow-md" id="print">
-        <div>this is some heading</div> 
-        <div className="w-full h-0.5 bg-black"></div>
-        <div className="p-2 flex flex-row w-full justify-around bg-green-900 py-4">
+      <div className="w-1/2 bg-white shadow-md mb-12" id="print">
+        <div className="w-full h-0.5 bg-black mt-4"></div>
+        <div className="p-2 flex flex-row w-full justify-around py-4  bg-gray-100">
           <div className="flex flex-col">
             <p>
               <span className="font-bold">Project Name: </span>{" "}
@@ -420,6 +440,146 @@ const Report = () => {
               {reportData[0].Temp}
             </p>
           </div>
+          <div></div>
+        </div>
+        <div className="w-full h-0.5 bg-black"></div>
+
+        <div className="px-8">
+          <p className="text-center my-4 bg-gray-100">Description</p>
+          <p className="bg-gray-200">{reportData[0].description}</p>
+          <p className="text-center my-4 bg-gray-100">Summary</p>
+          <table className="w-full mb-4">
+            <thead>
+              <tr className="border-b text-left">
+                <th>Activity</th>
+                <th>Comments</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reportData[0].summary.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.activity}</td>
+                  <td>{item.comments}</td>
+                  <td>{item.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <p className="text-center my-4 bg-gray-100">Delay</p>
+          <table className="w-full mb-4">
+            <thead>
+              <tr className="border-b text-left">
+                <th>Description</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reportData[0].delay.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.description}</td>
+                  <td>{item.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <p className="text-center my-4 bg-gray-100">Crew</p>
+          <table className="w-full mb-4">
+            <thead>
+              <tr className="border-b text-left">
+                <th>Name</th>
+                <th>Type</th>
+                <th>Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reportData[0].crew.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.type}</td>
+                  <td>{item.hours}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <p className="text-center my-4 bg-gray-100">Equipment</p>
+          <table className="w-full mb-4">
+            <thead>
+              <tr className="border-b text-left">
+                <th>Name</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reportData[0].equipment.map((item, index) => (
+                <tr key={index} className="pl-4">
+                  <td>{item.name}</td>
+                  <td>{item.type}</td>
+                  <td>{item.status}</td>
+                  <td>{item.hours}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <p className="text-center my-4 bg-gray-100">Materials</p>
+          <table className="w-full mb-4">
+            <thead>
+              <tr className="border-b text-left">
+                <th>Type</th>
+                <th>Used Today</th>
+                <th>Min Need</th>
+                <th>Max Present</th>
+                <th>Need</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reportData[0].materials.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.type}</td>
+                  <td>{item.usedToday}</td>
+                  <td>{item.minNeed}</td>
+                  <td>{item.maxPresent}</td>
+                  <td>{item.need}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <p className="text-center my-4 bg-gray-100">Accident or Other Events</p>
+          <p className="">{reportData[0].accidentOrOtherEvents}</p>
+
+          <p className="text-center my-4 bg-gray-100">Site Visitors</p>
+          <table className="w-full mb-4">
+            <thead>
+              <tr className="border-b text-left">
+                <th>Name</th>
+                <th>Type</th>
+                <th>Purpose</th>
+                <th>Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reportData[0].siteVisitor.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.type}</td>
+                  <td>{item.purpose}</td>
+                  <td>{item.comments}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* <div className="flex gap-4 flex-wrap justify-around mb-12">
+            {reportData[0].images.map((img, index)=>(
+              <img src={img} alt="i" key={index} className="flex w-40 h-32"></img>
+            ))}
+          </div> */}
         </div>
       </div>
       <div className="flex flex-col py-10 w-1/2 items-center">

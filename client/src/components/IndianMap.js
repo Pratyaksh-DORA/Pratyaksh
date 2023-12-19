@@ -17,8 +17,7 @@ function IndiaMap() {
       <p>{stateName}</p>
       <p>{stateCode}</p>
       <div className="w-96 h-96">
-
-      <SVGMap map={India} onLocationClick={onLocationClick} />
+        <SVGMap map={India} onLocationClick={onLocationClick} />
       </div>
     </>
   );
