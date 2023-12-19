@@ -12,11 +12,92 @@ const today = date.toLocaleDateString("en-GB", {
 
 const Report = () => {
   const [selectedReport, setSelectedReport] = useState("daily");
-  const [reportData, setReportData] = useState([{
-    projectManagerName: "Ishika Jain",
-    
-
-}])
+  const [reportData, setReportData] = useState([
+    {
+      projectName: "SIH1",
+      location: "Ks layout, Bangalore",
+      sector: "construction",
+      projectManager: "Ishika Jain",
+      contractor: "Dinesh A",
+      date: "12/10/2003",
+      reportingTimeStart: "6:00pm",
+      reportingTimeEnd: "8:00pm",
+      Weather: "Sunny",
+      Temp: "25-27 °C",
+      description:
+        "We made a llot of progress Today and it was  great and the building was half completed and we are great moving forward and terrace is done and next scans for paints and bim and something will be done",
+      summary: [
+        {
+          activity: "wall work",
+          comments:
+            "bricks were bought but not enough half wall was built and then something happened",
+          photos: ["link1", "link2", "link3"],
+          status: "completed",
+        },
+        {
+          activity: "foundation work",
+          comments:
+            "technically foundation ho gaya but thoda aur kaam hai toh woh karna hai but ho jayega aur baaki ham dekh lenge",
+          photos: ["link1", "link2", "link3"],
+          status: "in progress",
+        },
+        {
+          activity: "ceiling work",
+          comments:
+            "worker nahi aaye kaam shuru nahi hua ye baad mein dekh lenge jaldi jaldi karlenge",
+          photos: ["link1", "link2", "link3"],
+          status: "to-be started",
+        },
+      ],
+      delay: [
+        {
+          description: "wo aadmi nahi aaya jo kaam karne wala tha",
+          status: "urgent",
+        },
+        {
+          description: "ye kaam toh bohot zaroori tha par hua nahi",
+          status: "moderate",
+        },
+      ],
+      crew: [
+        { name: "namrata", type: "painter", hours: "70" },
+        { name: "sidhanti", type: "painter", hours: "20" },
+        { name: "prince", type: "site worker", hours: "50" },
+        { name: "gagan", type: "engineer", hours: "30" },
+      ],
+      equipment: [
+        { name: "bull dozer", type: "being used", hours: "70" },
+        { name: "mixer", type: "not being used", hours: "20" },
+        { name: "driller", type: "being used", hours: "50" },
+        { name: "newmixer", type: "used", hours: "30" },
+      ],
+      materials: [
+        {
+          type: "bricks",
+          usedToday: "2kgs",
+          minNeed: "20kgs",
+          maxPresent: "3kgs",
+          need: "urgent",
+        },
+        {
+          type: "poles",
+          usedToday: "4kgs",
+          minNeed: "60kgs",
+          maxPresent: "2kgs",
+          need: "not urgent",
+        },
+      ],
+      accidentOrOtherEvents: "no events today",
+      siteVisitor: [
+        {
+          name: "muniswamy",
+          type: "strength tester",
+          purpose: "structural tests for foundation",
+          comments: "gave this this feedback",
+        },
+      ],
+    },
+  ]);
   const [projectManagerName, setProjectManagerName] = useState(
     "sample cashier name"
   );
@@ -213,7 +294,7 @@ const Report = () => {
 
   return (
     <div className="md:flex">
-      <form
+      {/* <form
         className="flex flex-col bg-white shadow-md px-4 md:flex-row py-2 w-1/2"
         id="print"
       >
@@ -240,10 +321,10 @@ const Report = () => {
               />
             </div>
           </div>
-          <h1 className="text-center text-lg font-bold"><span className="px-2 uppercase">
-            {selectedReport}
-            </span>
-             REPORT</h1>
+          <h1 className="text-center text-lg font-bold">
+            <span className="px-2 uppercase">{selectedReport}</span>
+            REPORT
+          </h1>
           <div className="grid grid-cols-2 gap-2 pt-4 pb-8">
             <div className="text-sm font-bold sm:text-base">
               Cashier: {projectManagerName}
@@ -289,20 +370,68 @@ const Report = () => {
               alt="hi gir;"
             />
           </div>
-
         </div>
-      
-      </form>
-      < div className="flex flex-col py-10 w-1/2 items-center">
-          <select
-            className="w-1/3 py-2 px-2 max-w-full max-h-full"
-            value={selectedReport}
-            onChange={handleDropdownChange}
-          >
-            <option value={"daily"}>Daily</option>
-            <option value={"weekly"}>Weekly</option>
-            <option value={"monthly"}>Monthly</option>
-          </select>
+      </form> */}
+      <div className="w-1/2 bg-white shadow-md" id="print">
+        <div>this is some heading</div> 
+        <div className="w-full h-0.5 bg-black"></div>
+        <div className="p-2 flex flex-row w-full justify-around bg-green-900 py-4">
+          <div className="flex flex-col">
+            <p>
+              <span className="font-bold">Project Name: </span>{" "}
+              {reportData[0].projectName}
+            </p>
+            <p>
+              <span className="font-bold">Location: </span>
+              {reportData[0].location}
+            </p>
+            <p>
+              <span className="font-bold">Project Manager: </span>
+              {reportData[0].projectManager}
+            </p>
+            <p>
+              <span className="font-bold">Sector: </span>
+              {reportData[0].sector}
+            </p>
+            <p>
+              <span className="font-bold">Contractor: </span>
+              {reportData[0].contractor}
+            </p>
+          </div>
+          <div className="flex flex-col">
+            <p>
+              <span className="font-bold">Reporting Time Start: </span>
+              {reportData[0].reportingTimeStart}
+            </p>
+            <p>
+              <span className="font-bold">Reporting Time End: </span>
+              {reportData[0].reportingTimeEnd}
+            </p>
+            <p>
+              <span className="font-bold">Date: </span>
+              {reportData[0].date}
+            </p>
+            <p>
+              <span className="font-bold">Weather: </span>
+              {reportData[0].Weather}
+            </p>
+            <p>
+              <span className="font-bold">Temperature: </span>
+              {reportData[0].Temp}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col py-10 w-1/2 items-center">
+        <select
+          className="w-1/3 py-2 px-2 max-w-full max-h-full"
+          value={selectedReport}
+          onChange={handleDropdownChange}
+        >
+          <option value={"daily"}>Daily</option>
+          <option value={"weekly"}>Weekly</option>
+          <option value={"monthly"}>Monthly</option>
+        </select>
         <button
           onClick={SaveAsPDFHandler}
           className="w-2/3 rounded-md my-8 bg-blue-500 p-2 text-sm text-white shadow-sm hover:bg-blue-600"

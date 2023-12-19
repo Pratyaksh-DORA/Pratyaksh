@@ -2,16 +2,21 @@ import React from "react";
 import { TopNavbar } from "../components";
 import BG from "../assets/bg.jpg";
 import Description from "../components/Description";
+import IndianMap from "../components/IndianMap";
+import YourComponent from "../components/YourComponent";
+
 
 const Landing = () => {
   return (
     <>
+      <div id="react_container"></div>
+
       <section
         className="h-3/4 md:h-screen"
         style={{
           backgroundImage: `url(${BG})`,
           backgroundSize: "cover",
-          backgroundPosition: "center", // Center the background image
+          backgroundPosition: "center",
         }}
       >
         <TopNavbar />
@@ -25,6 +30,8 @@ const Landing = () => {
       <section className=" py-6">
         <Description />
       </section>
+      <IndianMap />
+      <YourComponent/>
     </>
   );
 };

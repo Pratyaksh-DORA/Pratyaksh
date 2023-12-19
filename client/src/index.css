@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,3 +15,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.parallax-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.parallax {
+  display: flex;
+  flex-direction: column;
+  height: 600%; /* Adjust this value based on your content and design */
+}
+
+.parallax-item {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  background-color: #eee; /* Adjust the background color as needed */
+}
+
