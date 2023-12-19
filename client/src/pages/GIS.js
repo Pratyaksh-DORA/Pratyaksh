@@ -7,7 +7,7 @@ import { RiExternalLinkLine } from "react-icons/ri";
 
 const GIS = () => {
 
-    const [data, setData] = useState([null])
+    const [data, setData] = useState()
     const customIcon = new Icon({
         iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
         // iconUrl: require("./../placeholder.png"),
@@ -47,14 +47,15 @@ const GIS = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {data.projects &&
+                {data &&
                 data.map((project) => (
+                    project.location && project.location.coordinates &&
                     <Marker key={project._id} position={project.location.coordinates} icon={customIcon}>
                         <Popup>
                             This is {project.name} <br /> 
                             Status: {project.status} <br /> 
                             <a href={`http://localhost:3000/${project._id}`} target="_self"> 
-                            Know more  </a> 
+                            <div className='flex mt-1'>Know more <RiExternalLinkLine className='ml-1 ' /></div></a> 
                         </Popup>
                     </Marker>
                 ))}
