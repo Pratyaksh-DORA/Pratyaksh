@@ -8,6 +8,10 @@ exports.addProjectUpdate = async (req, res, next) => {
     console.log(req.body);
     const { userId, projectId, updateDate, markedPoints, problemsFormData, materialsFormData, weatherInformation } = req.body;
 
+    if(weatherInformation.aqi > 100) {
+        alert("High AQI found. Please vacate");
+    }
+
     try {
         const imageDataList = markedPoints.map(point => point.imageData);
 

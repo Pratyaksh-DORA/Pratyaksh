@@ -117,6 +117,7 @@ const projectUpdateSchema = new mongoose.Schema({
     },
     progress: {
         type: Number,
+        required: true
     }
 });
 
