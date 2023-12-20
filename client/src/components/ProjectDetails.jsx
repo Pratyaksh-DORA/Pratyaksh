@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FormInput from './FormInput';
 import { editProject } from '../features/ProjectSlice';
-import { fetchData, putData } from '../utilis/Api';
+import { putData } from '../utilis/Api';
 
 const ProjectDetails = ({ closeModalSetting }) => {
     const dispatch = useDispatch();
@@ -22,8 +22,8 @@ const ProjectDetails = ({ closeModalSetting }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updatedProject = JSON.parse(localStorage.getItem("project"))
+        console.log(updatedProject)
 
-        // Send the updated project data to the backend
         try {
             const res = await putData(`/updateProject/${id}`, values);
             console.log(res);
@@ -33,6 +33,7 @@ const ProjectDetails = ({ closeModalSetting }) => {
             console.error("Error updating project on the backend:", error);
         }
     };
+
 
     const inputs = [
         {

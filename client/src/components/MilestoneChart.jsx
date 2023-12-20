@@ -1,4 +1,3 @@
-// MilestoneChart.js
 import React from 'react';
 
 const MilestoneChart = ({ milestones }) => {
