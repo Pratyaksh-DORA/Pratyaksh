@@ -101,19 +101,15 @@ const projectUpdateSchema = new mongoose.Schema({
     },
     markedPoints: { 
         type: [markedPointSchema], 
-        required: true 
     },
     problemsFormData: { 
         type: [problemsFormDataSchema], 
-        required: true 
     },
     materialsFormData: {
         type: [materialsFormDataSchema], 
-        required: true 
     },
     weatherInformation: {
         type: [weatherInformationSchema],
-        required: true
     },
     noOfBricks: {
         type: Number,
@@ -121,6 +117,7 @@ const projectUpdateSchema = new mongoose.Schema({
     },
     progress: {
         type: Number,
+        required: true
     }
 });
 

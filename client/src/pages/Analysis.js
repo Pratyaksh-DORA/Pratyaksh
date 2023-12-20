@@ -1,19 +1,13 @@
-
-   
-
-
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../utilis/Api";
 
 const Analysis = () => {
     const [markedCoordinates, setMarkedCoordinates] = useState([]);
-    const markedPoints = [
-        { x: 0.99, y: 0.67 },
-        { x: 56.33, y: 240 },
-        { x: 165.67, y: 180.33 },
-        { x: 319.67, y: 276.67 }
-    ];
+    const markedPoints = [];
     const imageUrl = require("../assets/test.jpg");
+    const [progressData, setProgressData] = useState("");
+    const [noOfBricks, setNoOfBricks] = useState("");
+    const [imageURL, setimageURL] = useState("");
 
     useEffect(() => {
         setMarkedCoordinates(markedPoints);
@@ -25,6 +19,16 @@ const Analysis = () => {
                
                 const responseUpdates = await fetchData("/getAllUpdatesOfProject");
                 console.log(responseUpdates);
+                const latestUpdate = responseUpdates.length > 0 ? responseUpdates[responseUpdates.length - 1] : 0;
+
+                if (latestUpdate) {
+                    setProgressData(latestUpdate.progress);
+                    setNoOfBricks(latestUpdate.noOfBricks);
+                    setimageURL(latestUpdate.markedPoints[0].imageData);
+                    console.log(latestUpdate.markedPoints[0].imageData);
+                    console.log(latestUpdate.markedPoints[0].x, latestUpdate.markedPoints[0].y);
+                    setMarkedCoordinates([{ x: latestUpdate.markedPoints[0].x, y: latestUpdate.markedPoints[0].y }]);
+                }
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -36,8 +40,11 @@ const Analysis = () => {
     const renderMarkedCoordinates = () => {
         return markedCoordinates.map((point, index) => (
             <>
-                <div
+                <a
                     key={index}
+                    href={imageURL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
                         position: "absolute",
                         top: point.y, // Adjust as needed
@@ -48,7 +55,7 @@ const Analysis = () => {
                         borderRadius: "50%",
                     }}
                 >
-                </div>
+                </a>
                 <iframe
                     src="http://localhost:3000/d-solo/a7422de5-fd7f-48b4-8e64-2da96e8e2fa4/dora?orgId=1&from=1703023727656&to=1703045327656&panelId=4"
                     width="450"
@@ -71,7 +78,10 @@ const Analysis = () => {
 
     return (
         <div>
-           
+            <div>
+                <p className="text-3xl">Progress: {progressData}</p>
+                <p className="text-3xl">Amount of Bricks present: {noOfBricks}</p>
+            </div>
             <div style={{ position: "absolute" }}>
                 <div>
                     <img

@@ -23,7 +23,6 @@ const MarkedPoints = () => {
         try {
             const response = await axios.post('http://localhost:5000/api/v1/addProjectUpdate', state);
             console.log(response.data);
-            console.log(state);
         } catch (error) {
             console.error(error);
         }
