@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native'; 
+import axios from 'axios';
 const pratyakshLogo = require("../../assets/logo192.png");
 import { useFormData } from '../redux/FormDataContext';
-import axios from 'axios';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -36,11 +36,12 @@ const Login = () => {
         });
         // Krishna@1370
         // krishna
+        // let response = true;
 
         if (response) {
             console.log('Login successful', response.data);
-            // state.projectId = response.data.user.currentProject;
-            // state.userId = response.data.user._id;
+            state.projectId = response.data.user.currentProject;
+            state.userId = response.data.user._id;
             navigation.navigate('MaterialsForm');
         }
     } catch (error) {
