@@ -53,7 +53,7 @@ exports.getOneProject = async (req, res, next) => {
         useFindAndModify: true,
     })
     res.status(200).json({
-        sucess: true,
+
         project,
         updatedUser
     })
@@ -116,10 +116,9 @@ exports.updateProject = async (req, res, next) => {
 
 exports.getAllProjects = async (req, res, next) => {
     const projects = await Project.find({});
-    res.status(200).json({
-        sucess: true,
+    res.status(200).json(
         projects
-    })
+    )
 }
 
 exports.test = async (req, res, next) => {

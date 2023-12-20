@@ -15,18 +15,19 @@ const Home = () => {
     // iconUrl: require("./../placeholder.png"),
     iconSize: [38, 38],
   });
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const user = JSON.parse(localStorage.getItem("user"));
-  //     let id = user.currentProject;
-  //     id = id.toString();
-  //     // const res = await fetchData(`/getOneProject/${id}`);
-  //     // console.log(res)
-  //     // setProject(res.project)
-  //   }
-  //   fetch()
-  // }, [])
   const project = useSelector((state) => state.project)
+  // const user = useSelector((state) => state.user)
+  useEffect(() => {
+
+
+    const fetch = async () => {
+      const res = await fetchData("/getAllUpdatesOfProject")
+      console.log(res)
+    }
+    fetch()
+
+  }, [project])
+
   console.log("first,p", project)
 
   const milestones = project && project.milestones;
