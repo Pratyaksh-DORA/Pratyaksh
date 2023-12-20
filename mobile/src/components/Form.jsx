@@ -18,8 +18,6 @@ function Form() {
     useEffect(() => {
         state.problemsFormData = [],
         state.markedPoints = [],
-        state.projectId = '',
-        state.userId = '',
         state.updateDate = new Date();
     }, []);
 
@@ -27,11 +25,9 @@ function Form() {
         React.useCallback(() => {
             state.problemsFormData = [],
             state.markedPoints = [],
-            state.projectId = '',
-            state.userId = '',
             state.updateDate = new Date();
         }, [])
-      );
+    );
 
     const [formData, setFormData] = useState([
         { problem: '', reason: '', effect: '', severity: 'low' },

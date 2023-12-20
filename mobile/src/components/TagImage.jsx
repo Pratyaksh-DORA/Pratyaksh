@@ -32,6 +32,7 @@ const MarkPointOnImage = () => {
 
     const handleImagePress = (event) => {
         const { locationX, locationY } = event.nativeEvent;
+        console.log(locationX, locationY);
 
         const existingPoint = points.find(point => (
             Math.abs(point.x - locationX) < 20 && Math.abs(point.y - locationY) < 20
@@ -77,7 +78,7 @@ const MarkPointOnImage = () => {
             <TouchableOpacity style={styles.imageContainer} onPress={handleImagePress}>
                 <Image source={selectedImage.path} 
                     style={styles.image} 
-                    resizeMode="stretch" 
+                    resizeMode="contain" 
                     onLayout={(event) => {
                         const { width, height } = event.nativeEvent.layout;
                         setImageDimensions({ width, height });
@@ -137,7 +138,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%',
-        marginVertical: 15,
+        height: '50%',
+        marginVertical: 74,
         backgroundColor: 'red',
     },
     image: {

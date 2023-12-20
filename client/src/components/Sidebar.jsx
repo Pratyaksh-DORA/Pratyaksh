@@ -89,9 +89,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
 
   return (
     <div
-      className={` text-white h-screen ${
-        isCollapsed ? "w-16 bg-primary" : "w-52 bg-primary"
-      } transition-all fixed top-0 left-0 z-5`}
+      className={` text-white h-screen ${isCollapsed ? "w-16 bg-primary" : "w-52 bg-primary"
+        } transition-all fixed top-0 left-0 z-5 h-screen`}
     >
       <div className="p-4 flex justify-between items-center">
         {!isCollapsed && (

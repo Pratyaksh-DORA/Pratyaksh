@@ -11,6 +11,22 @@ function MaterialsForm() {
         { material: '', quantityUsed: '' },
     ]);
 
+    useEffect(() => {
+        state.problemsFormData = [],
+        state.markedPoints = [],
+        state.updateDate = new Date();
+        state.materialsFormData = [];
+    }, []);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            state.problemsFormData = [],
+            state.markedPoints = [],
+            state.materialsFormData = [],
+            state.updateDate = new Date();
+        }, [])
+    );
+
     const handleInputChange = (index, field, value) => {
         const updatedFormData = [...materialsFormData];
         updatedFormData[index][field] = value;

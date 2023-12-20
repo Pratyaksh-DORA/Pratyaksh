@@ -114,6 +114,13 @@ const projectUpdateSchema = new mongoose.Schema({
     weatherInformation: {
         type: [weatherInformationSchema],
         required: true
+    },
+    noOfBricks: {
+        type: Number,
+        required: true
+    },
+    progress: {
+        type: Number,
     }
 });
 
