@@ -7,7 +7,7 @@ const CustomError = require("../utilis/customError");
 exports.addProjectUpdate = async (req, res, next) => {
     console.log(req.body);
     const { userId, projectId, updateDate, markedPoints, problemsFormData, materialsFormData, weatherInformation } = req.body;
-    
+
     try {
         const imageDataList = markedPoints.map(point => point.imageData);
 
@@ -70,5 +70,5 @@ exports.getAllUpdatesOfProject = async (req, res, next) => {
     const updates = await ProjectUpdate.find({ projectId });
     console.log(updates);
     res.status(200).json(updates)
-    
+
 }
