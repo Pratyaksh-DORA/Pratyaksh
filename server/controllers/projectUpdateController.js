@@ -24,7 +24,7 @@ const CustomError = require("../utilis/customError")
 exports.addProjectUpdate = async (req, res, next) => {
     console.log(req.body);
     const { userId, projectId, updateDate, markedPoints, problemsFormData } = req.body;
-    
+
     try {
         const update = await ProjectUpdate.create({
             userId,
