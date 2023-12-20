@@ -5,7 +5,7 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { login } from "../features/AuthSlice";
 import { editProject } from "../features/ProjectSlice";
-import Modal from "./Modal";
+import ModalI from "./Modal";
 import { fetchData, putData } from "../utilis/Api";
 import { Link } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa6";
@@ -16,12 +16,12 @@ import {
   MdOutlineCheckBox,
   MdOutlineDashboard,
   MdDashboard,
+  MdOutlineSettings,
 } from "react-icons/md";
-
 import { PiGraphDuotone } from "react-icons/pi";
-
+import ProjectDetails from "./ProjectDetails";
+import Modal from "react-modal";
 const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
-
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
   let id = user.currentProject;
@@ -69,6 +69,16 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     fetchProjectDetails(id);
     closeModal();
   };
+  const [modalIsOpenSetting, setModalIsOpenSetting] = useState(false);
+
+  const openModalSetting = () => {
+    setModalIsOpenSetting(true);
+  };
+
+  const closeModalSetting = () => {
+    console.log("drunken");
+    setModalIsOpenSetting(false);
+  };
 
   const fetchProjectDetails = async (id) => {
     const res = await fetchData(`/getOneProject/${id}`);
@@ -79,9 +89,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
 
   return (
     <div
-      className={` text-white h-screen ${
-        isCollapsed ? "w-16 bg-primary" : "w-52 bg-primary"
-      } transition-all fixed top-0 left-0 z-10`}
+      className={` text-white h-screen ${isCollapsed ? "w-16 bg-primary" : "w-52 bg-primary"
+        } transition-all fixed top-0 left-0 z-5 h-screen`}
     >
       <div className="p-4 flex justify-between items-center">
         {!isCollapsed && (
@@ -94,7 +103,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
               {selectedProject ? selectedProject.name : "Loading..."}
             </button>
             {isModalOpen && (
-              <Modal
+              <ModalI
                 projects={projects}
                 closeModal={closeModal}
                 position={modalPosition}
@@ -126,13 +135,13 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
           </Link>
           <Link
             to={`/${id}/task`}
-            className="flex p-1 items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
+            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2 "
           >
             <MdOutlineCheckBox /> Tasks
           </Link>
           <Link
             to={`/${id}/team`}
-            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
+            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2 "
           >
             {" "}
             <FaRegUser />
@@ -140,40 +149,57 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
           </Link>
           <Link
             to={`/${id}/update`}
-            className="flex p-1 items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
+            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2 "
           >
             <MdUpdate /> Updates
           </Link>
           <Link
             to={`/${id}/analysis`}
-            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
+            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2 "
           >
             <MdBarChart /> Analysis
           </Link>
           <Link
             to={`/${id}/gis`}
-            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
+            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2 "
           >
             <FaMapMarkedAlt /> GIS{" "}
           </Link>
           <Link
             to={`/${id}/simulator`}
-            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
+            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2 "
           >
             <PiGraphDuotone /> Simulator
           </Link>
           <Link
             to={`/${id}/chat`}
-            className="flex p-1 items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
+            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black gap-2 "
           >
             <MdChatBubbleOutline /> Chats
           </Link>
           <Link
             to={`/${id}/report`}
-            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
+            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black gap-2 "
           >
             <MdChatBubbleOutline /> Reports{" "}
           </Link>
+          <div>
+            <button
+              onClick={openModalSetting}
+              className="flex gap-2 items-center"
+            >
+              <div className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2 ">
+                <MdOutlineSettings /> Setting
+              </div>
+            </button>
+            <Modal
+              isOpen={modalIsOpenSetting}
+              onRequestClose={closeModalSetting}
+              contentLabel="Hello World Modal"
+            >
+              <ProjectDetails closeModalSetting={closeModalSetting} />
+            </Modal>
+          </div>
         </div>
       ) : (
         <>
@@ -186,7 +212,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             </Link>
             <Link
               to={`/${id}/task`}
-              className="flex text-lg p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
+              className="flex text-lg p-1 items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
             >
               <MdOutlineCheckBox />{" "}
             </Link>
@@ -209,6 +235,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             >
               <MdBarChart />{" "}
             </Link>
+
             <Link
               to={`/${id}/simulator`}
               className="flex text-lg p-1 items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2"
@@ -221,6 +248,20 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             >
               <MdChatBubbleOutline />{" "}
             </Link>
+            <div>
+              <button onClick={openModalSetting}>
+                <div className="flex text-lg p-1 items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2">
+                  <MdOutlineSettings />
+                </div>
+              </button>
+              <Modal
+                isOpen={modalIsOpenSetting}
+                onRequestClose={closeModalSetting}
+                contentLabel="Hello World Modal"
+              >
+                <ProjectDetails closeModalSetting={closeModalSetting} />
+              </Modal>
+            </div>
           </div>
         </>
       )}

@@ -4,6 +4,7 @@ import { TaskTable } from '../components';
 import { useDispatch } from 'react-redux';
 import { editProject } from '../features/ProjectSlice';
 import { putData } from '../utilis/Api';
+import GaantChart from '../components/visulComponents/GaantChart';
 
 const Task = () => {
     const dispatch = useDispatch();
@@ -50,6 +51,8 @@ const Task = () => {
 
     return (
         <div className='p-4'>
+                  <div><GaantChart/></div>
+
             <div>
                 {editedMilestones.map((milestone, index) => (
                     <div key={index} className='mt-8'>

@@ -1,4 +1,3 @@
-// PieChart.js
 import React from 'react';
 
 const PieChart = ({ data }) => {

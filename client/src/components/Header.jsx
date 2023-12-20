@@ -4,7 +4,7 @@ import { MdTranslate } from "react-icons/md";
 
 const Header = () => {
     return (
-        <div className="py-2 bg-white sticky h-16 shadow-md p-4 m-4 rounded-md ">
+        <div className="py-2 bg-white sticky h-16 shadow-md p-4 m-4 rounded-md">
             <div className=" flex items-center justify-between px-6">
                 <img className="w-64" src={Jharkand_logo} alt="Jharkand_logo" />
                 <button className="flex items-center jusstify-center border border-primary rounded-md text-primary py-1 px-4">
