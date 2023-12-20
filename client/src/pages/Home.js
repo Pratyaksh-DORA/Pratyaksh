@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { MilestoneChart } from "../components";
 import { Icon } from "leaflet";
@@ -6,12 +6,13 @@ import {PieChart} from "react-minimal-pie-chart"
 
 import "leaflet/dist/leaflet.css";
 
-const Home = ({ latitude, longitude }) => {
+const Home = () => {
   const customIcon = new Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
     // iconUrl: require("./../placeholder.png"),
     iconSize: [38, 38],
   });
+
 
   const milestones = [
     {
@@ -107,6 +108,9 @@ const Home = ({ latitude, longitude }) => {
     { title: "paused", value: 25, color: "#e67e22" }, // Orange
   ];
 
+  const project = JSON.parse(localStorage.getItem("project"))
+  const latitude = project.location.coordinates[0]
+  const longitude = project.location.coordinates[1]
   return (
     <div className="container mx-auto mt-8 flex flex-col gap-8">
       <div className="flex items-center ml-2 px-4 gap-12">

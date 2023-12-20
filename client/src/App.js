@@ -35,7 +35,7 @@ function App() {
             <Route path="/:id" element={<Main />}>
               <Route
                 path=""
-                element={<Home latitude={40.7128} longitude={-74.006} />}
+                element={<Home />}
               />
               <Route path="task" element={<Task />} />
               <Route path="admin" element={<Admin />} />

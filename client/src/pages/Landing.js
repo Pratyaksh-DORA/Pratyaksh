@@ -2,8 +2,6 @@ import React from "react";
 import { TopNavbar } from "../components";
 import BG from "../assets/bg.jpg";
 import Description from "../components/Description";
-import IndianMap from "../components/IndianMap";
-import YourComponent from "../components/YourComponent";
 
 
 const Landing = () => {
@@ -30,8 +28,6 @@ const Landing = () => {
       <section className=" py-6">
         <Description />
       </section>
-      <IndianMap />
-      <YourComponent/>
     </>
   );
 };

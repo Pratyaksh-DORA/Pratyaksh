@@ -11,9 +11,9 @@ export const fetchData = async (endpoint, options = {}) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
-                // Add any other headers as needed
             },
-            ...options,
+            ...options,                // Add any other headers as needed
+
         });
         return response.data;
     } catch (error) {
