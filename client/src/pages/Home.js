@@ -9,26 +9,31 @@ import { fetchData } from "../utilis/Api";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-  // const [project, setProject] = useState()
+  const [project, setProject] = useState()
   const customIcon = new Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
     // iconUrl: require("./../placeholder.png"),
     iconSize: [38, 38],
   });
-  const project = useSelector((state) => state.project)
-  // const user = useSelector((state) => state.user)
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  let id = user.currentProject;
+  id = id.toString();
   useEffect(() => {
 
 
     const fetch = async () => {
-      const res = await fetchData("/getAllUpdatesOfProject")
-      console.log(res)
+      const res = await fetchData(`/getOneProject/${id}`)
+      setProject(res.project)
+      // console.log(res)
     }
     fetch()
 
-  }, [project])
+  }, [user])
+  // const x = useSelector((state) => state.project)
+  // setProject(x)
 
-  console.log("first,p", project)
+  // console.log("first,p", project)
 
   const milestones = project && project.milestones;
   const data = [
@@ -74,11 +79,11 @@ const Home = () => {
                   </p>
                   <p>
                     <span className="font-semibold">Start date:</span>{" "}
-                    {project.startDate.slice(0, -14)}
+                    {project?.startDate}
                   </p>
                   <p>
                     <span className="font-semibold">Actual End date:</span>{" "}
-                    {project.endDate.slice(0, -14)}
+                    {project?.endDate}
                   </p>
                   <p>
                     <span className="font-semibold">Delay by :</span>14 days
