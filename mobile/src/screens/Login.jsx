@@ -41,6 +41,7 @@ const Login = () => {
         if (response) {
             console.log('Login successful', response.data);
             state.projectId = response.data.user.currentProject;
+            console.log(state.projectId);
             state.userId = response.data.user._id;
             navigation.navigate('MaterialsForm');
         }
