@@ -4,7 +4,7 @@ const connectWithDatabase = require("./config/db");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv").config();
-const tesseract = require("tesseract.js");
+// const tesseract = require("tesseract.js");
 const fs = require("fs");
 const app = express();
 
