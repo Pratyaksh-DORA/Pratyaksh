@@ -86,7 +86,7 @@ exports.updateProject = async (req, res, next) => {
     if (!project) {
         return next(new CustomError(stringConstants.noProject, 404));
     }
-    const { name, description, location, startDate, endDate, status, milestones, category, sector } = req.body;
+    const { name, description, location, startDate, endDate, status, milestones, category, sector, totalPercentage } = req.body;
 
 
     if (name) project.name = name;
@@ -97,6 +97,7 @@ exports.updateProject = async (req, res, next) => {
     if (status) project.status = status;
     if (category) project.category = category;
     if (sector) project.sector = sector;
+    if (totalPercentage) project.totalPercentage = totalPercentage
     if (milestones) {
         milestones.forEach((milestone) => {
             milestone.tasks.forEach((task) => {

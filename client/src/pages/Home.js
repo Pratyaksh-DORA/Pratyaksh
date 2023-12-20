@@ -17,36 +17,43 @@ const Home = () => {
   });
 
   const [updateDetails, setUpdateDetails] = useState()
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await fetchData("/getAllUpdatesOfProject")
+      console.log(res)
+      setUpdateDetails(res)
+    }
+    fetch()
+  }, [])
 
   const user = JSON.parse(localStorage.getItem("user"));
-  const check = useSelector((state) => state.user)
+  const check = useSelector((state) => state.auth.user);
+  const redpro = useSelector((state) => state.project)
   console.log("check", check)
   let id = user.currentProject;
   id = id.toString();
+  console.log(id)
   useEffect(() => {
 
 
     const fetch = async () => {
       const res = await fetchData(`/getOneProject/${id}`)
       setProject(res.project)
-      // console.log(res)
+      console.log("ji", res)
     }
     fetch()
 
-  }, [user, check])
-  // const x = useSelector((state) => state.project)
-  // setProject(x)
+  }, [check, redpro])
 
-  // console.log("first,p", project)
 
   const milestones = project && project.milestones;
-  const data = [
-    { title: "completed", value: 10, color: "#8e44ad" }, // Purple
-    { title: "not started", value: 20, color: "#808080" }, // Grey
-    { title: "planning", value: 5, color: "#3498db" }, // Blue
-    { title: "progress", value: 15, color: "#27ae60" }, // Green
-    { title: "cancelled", value: 25, color: "#e74c3c" }, // Red
-    { title: "paused", value: 25, color: "#e67e22" }, // Orange
+  const data = project && [
+    { title: "completed", value: project.totalPercentage[0], color: "#8e44ad" }, // Purple
+    { title: "not started", value: project.totalPercentage[1], color: "#808080" }, // Grey
+    { title: "planning", value: project.totalPercentage[2], color: "#3498db" }, // Blue
+    { title: "progress", value: project.totalPercentage[3], color: "#27ae60" }, // Green
+    { title: "cancelled", value: project.totalPercentage[4], color: "#e74c3c" }, // Red
+    { title: "paused", value: project.totalPercentage[5], color: "#e67e22" }, // Orange
   ];
 
   const latitude = project && project.location.coordinates[0];
@@ -83,15 +90,15 @@ const Home = () => {
                   </p>
                   <p>
                     <span className="font-semibold">Start date:</span>{" "}
-                    {project?.startDate}
+                    {project?.startDate.slice(0, -14)}
                   </p>
                   <p>
                     <span className="font-semibold">Actual End date:</span>{" "}
-                    {project?.endDate}
+                    {project?.endDate.slice(0, -14)}
                   </p>
-                  <p>
+                  {/* <p>
                     <span className="font-semibold">Delay by :</span>14 days
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <div className=" flex gap-8 items-center bg-white rounded-lg shadow-md p-4 w-fit py-8">
