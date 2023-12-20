@@ -33,17 +33,15 @@ const projectSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-
         default: "NOt Started"
     },
-    totalPercentage: {
+    totalPercentage: [{
         type: Number
-    },
+    }],
     milestones: [
         {
             name: {
                 type: String,
-
             },
             target_date: {
                 type: Date
@@ -52,9 +50,9 @@ const projectSchema = new mongoose.Schema({
                 type: String,
                 default: "Not Started"
             },
-            milestonePercentage: {
-                type: String
-            },
+            milestonePercentage: [{
+                type: Number
+            }],
             tasks: [
                 {
 
@@ -75,9 +73,9 @@ const projectSchema = new mongoose.Schema({
                         type: String,
                         default: "Not Started"
                     },
-                    percentage: {
+                    percentage: [{
                         type: Number
-                    }
+                    }],
                 },]
         }
     ],
