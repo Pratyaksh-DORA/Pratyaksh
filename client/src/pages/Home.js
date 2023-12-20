@@ -16,7 +16,11 @@ const Home = () => {
     iconSize: [38, 38],
   });
 
+  const [updateDetails, setUpdateDetails] = useState()
+
   const user = JSON.parse(localStorage.getItem("user"));
+  const check = useSelector((state) => state.user)
+  console.log("check", check)
   let id = user.currentProject;
   id = id.toString();
   useEffect(() => {
@@ -29,7 +33,7 @@ const Home = () => {
     }
     fetch()
 
-  }, [user])
+  }, [user, check])
   // const x = useSelector((state) => state.project)
   // setProject(x)
 

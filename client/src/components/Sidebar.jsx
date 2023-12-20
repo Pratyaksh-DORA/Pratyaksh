@@ -165,18 +165,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
           >
             <FaMapMarkedAlt /> GIS{" "}
           </Link>
-          <Link
-            to={`/${id}/simulator`}
-            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black hover:p-1 gap-2 "
-          >
-            <PiGraphDuotone /> Simulator
-          </Link>
-          <Link
-            to={`/${id}/chat`}
-            className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black gap-2 "
-          >
-            <MdChatBubbleOutline /> Chats
-          </Link>
+
           <Link
             to={`/${id}/report`}
             className="flex p-1  items-center hover:bg-white hover:rounded-md hover:text-black gap-2 "

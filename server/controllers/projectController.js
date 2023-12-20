@@ -121,8 +121,9 @@ exports.getAllProjects = async (req, res, next) => {
     )
 }
 
-exports.test = async (req, res, next) => {
-    res.status(200).json({
-        message: "sucess"
-    })
+exports.percentageCalculator = async (req, res, next) => {
+    const user = req.user.id
+    const project = req.user.currentProject;
+    const { milestone } = req.body
+
 }
