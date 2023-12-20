@@ -7,6 +7,7 @@ const Analysis = () => {
     const imageUrl = require("../assets/test.jpg");
     const [progressData, setProgressData] = useState("");
     const [noOfBricks, setNoOfBricks] = useState("");
+    const [imageURL, setimageURL] = useState("");
 
     useEffect(() => {
         setMarkedCoordinates(markedPoints);
@@ -23,8 +24,8 @@ const Analysis = () => {
                 if (latestUpdate) {
                     setProgressData(latestUpdate.progress);
                     setNoOfBricks(latestUpdate.noOfBricks);
-                    console.log(progressData);
-                    console.log(noOfBricks);
+                    setimageURL(latestUpdate.markedPoints[0].imageData);
+                    console.log(latestUpdate.markedPoints[0].imageData);
                     console.log(latestUpdate.markedPoints[0].x, latestUpdate.markedPoints[0].y);
                     setMarkedCoordinates([{ x: latestUpdate.markedPoints[0].x, y: latestUpdate.markedPoints[0].y }]);
                 }
@@ -39,8 +40,11 @@ const Analysis = () => {
     const renderMarkedCoordinates = () => {
         return markedCoordinates.map((point, index) => (
             <>
-                <div
+                <a
                     key={index}
+                    href={imageURL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
                         position: "absolute",
                         top: point.y, // Adjust as needed
@@ -51,7 +55,7 @@ const Analysis = () => {
                         borderRadius: "50%",
                     }}
                 >
-                </div>
+                </a>
                 <iframe
                     src="http://localhost:3000/d-solo/a7422de5-fd7f-48b4-8e64-2da96e8e2fa4/dora?orgId=1&from=1703023727656&to=1703045327656&panelId=4"
                     width="450"

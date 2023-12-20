@@ -11,15 +11,41 @@ const today = date.toLocaleDateString("en-GB", {
 });
 
 const Report = () => {
+  const [latestUpdate, setLatestUpdate] = useState("");
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const fetchDataAsync = async () => {
+      try {
+          const fetchDetails = async () => {
+          const res = await fetchData("/getAllProjectofuser");
+          setProjects(res[0]);
+          console.log(res[0]);
+        };
+        fetchDetails();
+        const responseUpdates = await fetchData("/getAllUpdatesOfProject");
+        const latestUpdate = responseUpdates.length > 0 ? responseUpdates[responseUpdates.length - 1] : responseUpdates;
+        if (latestUpdate) {
+          setLatestUpdate(latestUpdate);
+          console.log(latestUpdate);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchDataAsync();
+  }, []);
+
   const [selectedReport, setSelectedReport] = useState("daily");
+  console.log(projects.name);
   const [reportData, setReportData] = useState([
     {
-      projectName: "SIH1",
-      location: "Ks layout, Bangalore",
+      projectName: projects.name,
+      location: projects.location,
       sector: "construction",
       projectManager: "Ishika Jain",
       contractor: "Dinesh A",
-      date: today,
+      date: latestUpdate.updateDate,
       reportingTimeStart: "6:00pm",
       reportingTimeEnd: "8:00pm",
       Weather: "Sunny",
@@ -118,18 +144,6 @@ const Report = () => {
     },
   ]);
 
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    const fetchDetails = async () => {
-      const res = await fetchData("/getAllProjectofuser");
-
-      setProjects(res);
-      console.log(res);
-    };
-    fetchDetails();
-  }, []);
-
   const handleDropdownChange = (event) => {
     setSelectedReport(event.target.value);
   };
@@ -192,7 +206,7 @@ const Report = () => {
             <div className="flex flex-col">
               <p>
                 <span className="font-bold">Project Name: </span>{" "}
-                {reportData[0].name}
+                {projects.name}
               </p>
               <p>
                 <span className="font-bold">Location: </span>
@@ -200,7 +214,7 @@ const Report = () => {
               </p>
               <p>
                 <span className="font-bold">Project Manager: </span>
-                {reportData[0].projectManager}
+                {projects.user}
               </p>
               <p>
                 <span className="font-bold">Sector: </span>
@@ -222,15 +236,23 @@ const Report = () => {
               </p>
               <p>
                 <span className="font-bold">Date: </span>
-                {reportData[0].date}
+                {latestUpdate.updateDate}
               </p>
               <p>
-                <span className="font-bold">Weather: </span>
-                {reportData[0].Weather}
+              {latestUpdate.weatherInformation && (
+                <span>
+                  <span className="font-bold">Humidity: </span>
+                  {latestUpdate.weatherInformation[0].humidity}
+                </span>
+              )}
               </p>
               <p>
-                <span className="font-bold">Temperature: </span>
-                {reportData[0].Temp}
+              {latestUpdate.weatherInformation && (
+                <span>
+                  <span className="font-bold">Temperature: </span>
+                  {latestUpdate.weatherInformation[0].feels_like}C
+                </span>
+              )}
               </p>
             </div>
             <div></div>
@@ -265,15 +287,19 @@ const Report = () => {
             <table className="w-full mb-4">
               <thead>
                 <tr className="border-b text-left">
-                  <th>Description</th>
-                  <th>Status</th>
+                  <th>Problem</th>
+                  <th>Effect</th>
+                  <th>Reason</th>
+                  <th>Severity</th>
                 </tr>
               </thead>
               <tbody>
-                {reportData[0].delay.map((item, index) => (
+                {latestUpdate.problemsFormData && latestUpdate.problemsFormData.map((item, index) => (
                   <tr key={index}>
-                    <td>{item.description}</td>
-                    <td>{item.status}</td>
+                    <td>{item.problem}</td>
+                    <td>{item.effect}</td>
+                    <td>{item.reason}</td>
+                    <td>{item.severity}</td>
                   </tr>
                 ))}
               </tbody>
@@ -333,10 +359,10 @@ const Report = () => {
                 </tr>
               </thead>
               <tbody>
-                {reportData[0].materials.map((item, index) => (
+                {latestUpdate.materialsFormData && latestUpdate.materialsFormData.map((item, index) => (
                   <tr key={index}>
-                    <td>{item.type}</td>
-                    <td>{item.usedToday}</td>
+                    <td>{item.material}</td>
+                    <td>{item.quantityUsed}</td>
                     <td>{item.minNeed}</td>
                     <td>{item.maxPresent}</td>
                     <td>{item.need}</td>
