@@ -30,13 +30,14 @@ const Login = () => {
     const handleLogin = async () => {
     try {
         console.log(username, password);
-        const response = await axios.post('http://localhost:5000/api/v1/login', {
+        const response = await axios.post('https://pokemon-ash.up.railway.app/api/v1/login', {
             username: username,
             password: password,
         });
         // Krishna@1370
         // krishna
         // let response = true;
+        // ganesha
 
         if (response) {
             console.log('Login successful', response.data);
