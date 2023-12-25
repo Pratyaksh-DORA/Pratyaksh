@@ -40,6 +40,7 @@ exports.addProjectUpdate = async (req, res, next) => {
             prevImageDataList.forEach(imageData => {
                 prevImageLoc = imageData;
             });
+
             // const processStatus = await axios.post("https://fbd8-223-26-31-186.ngrok-free.app/",{
             //     "prev_img" : prevImageLoc,
             //     "img" : imageLoc
