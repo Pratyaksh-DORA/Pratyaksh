@@ -40,6 +40,11 @@ const Analysis = () => {
     const renderMarkedCoordinates = () => {
         return markedCoordinates.map((point, index) => (
             <>
+            <div className="flex flex-wrap gap-4 m-4">
+       
+        </div>
+        <iframe src="https://ishika2413.grafana.net/d-solo/c91c5e3a-6211-4f27-afac-1478ccd74e7a/pie-chart?orgId=1&from=1703049605498&to=1703071205498&panelId=2" width="450" height="200" frameborder="0"></iframe>
+        <iframe src="https://ishika2413.grafana.net/d-solo/c91c5e3a-6211-4f27-afac-1478ccd74e7a/pie-chart?orgId=1&from=1703049644929&to=1703071244929&panelId=1" width="450" height="200" frameborder="0"></iframe>
                 <a
                     key={index}
                     href={imageURL}
@@ -56,20 +61,7 @@ const Analysis = () => {
                     }}
                 >
                 </a>
-                <iframe
-                    src="http://localhost:3000/d-solo/a7422de5-fd7f-48b4-8e64-2da96e8e2fa4/dora?orgId=1&from=1703023727656&to=1703045327656&panelId=4"
-                    width="450"
-                    height="200"
-                    frameborder="0"
-                    title="1"
-                ></iframe>
-                <iframe
-                    src="http://localhost:3000/d-solo/a7422de5-fd7f-48b4-8e64-2da96e8e2fa4/dora?orgId=1&from=1703023757604&to=1703045357605&panelId=3"
-                    width="450"
-                    height="200"
-                    frameborder="0"
-                    title="2"
-                ></iframe>
+             
             </>
         ));
     };

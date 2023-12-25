@@ -21,12 +21,13 @@ const MarkedPoints = () => {
         alert("Data submitted Successfully!!");
         console.log(state);
         try {
-            const response = await axios.post('http://localhost:5000/api/v1/addProjectUpdate', state);
+            const response = await axios.post('https://pokemon-ash.up.railway.app/api/v1/addProjectUpdate', state);
             console.log(response.data);
         } catch (error) {
             console.error(error);
         }
         navigation.navigate('MaterialsForm');
+        // ganesha
     }
 
     return (
