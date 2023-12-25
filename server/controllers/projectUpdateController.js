@@ -16,16 +16,17 @@ exports.addProjectUpdate = async (req, res, next) => {
         const imageDataList = markedPoints.map(point => point.imageData);
 
         let imageLoc;
-        let progress;
+        let progress = 0;
         imageDataList.forEach(imageData => {
             imageLoc = imageData;
         });
         console.log(imageLoc);
 
-        const estimateApi = await axios.post("https://b5b9-223-26-31-186.ngrok-free.app/",{
-            "img" : imageLoc
-        });
-        const noOfBricks = estimateApi.data.bricks;
+        // const estimateApi = await axios.post("https://b5b9-223-26-31-186.ngrok-free.app/",{
+        //     "img" : imageLoc
+        // });
+        // const noOfBricks = estimateApi.data.bricks;
+        const noOfBricks = 20;
 
 
         const lastUpdates = await ProjectUpdate.find({ projectId }).sort({ updateDate: 'desc' }).exec();
@@ -40,11 +41,13 @@ exports.addProjectUpdate = async (req, res, next) => {
                 prevImageLoc = imageData;
             });
 
-            const processStatus = await axios.post("https://fbd8-223-26-31-186.ngrok-free.app/",{
-                "prev_img" : prevImageLoc,
-                "img" : imageLoc
-            });
-            progress = processStatus.data.progress;
+            // const processStatus = await axios.post("https://fbd8-223-26-31-186.ngrok-free.app/",{
+            //     "prev_img" : prevImageLoc,
+            //     "img" : imageLoc
+            // });
+            // progress = processStatus.data.progress;
+            progress = 20;
+            progress = progress;
         }
 
         const update = await ProjectUpdate.create({

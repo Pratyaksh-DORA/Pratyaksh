@@ -36,7 +36,7 @@ const Login = () => {
         });
         // Krishna@1370
         // krishna
-        // let response = true;
+        // ganesha
 
         if (response) {
             console.log('Login successful', response.data);
